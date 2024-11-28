@@ -1,0 +1,42 @@
+{
+    "extends": "next/core-web-vitals",
+    "plugins": [
+        "prettier",
+        "unused-imports",
+        "import"
+    ],
+    "rules": {
+        "no-unused-vars": [
+            "error",
+            {
+                "vars": "local",
+                "args": "none"
+            }
+        ],
+        "unused-imports/no-unused-imports": "warn",
+        "import/order": [
+            2,
+            {
+                "groups": [
+                    "builtin",
+                    "external",
+                    [
+                        "internal",
+                        "parent",
+                        "sibling",
+                        "index"
+                    ],
+                    "unknown"
+                ],
+                "pathGroupsExcludedImportTypes": [
+                    "builtin"
+                ],
+                "newlines-between": "always",
+                "alphabetize": {
+                    "order": "asc",
+                    "caseInsensitive": true
+                }
+            }
+        ]
+    }
+}

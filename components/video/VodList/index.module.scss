@@ -1,0 +1,84 @@
+.vod-list {
+    &-item {
+        &-cover {
+            transition: filter 0.2s;
+            filter: brightness(0.8);
+            position: relative;
+            height: 0;
+            padding-top: 140%;
+            background-position: 50% 50%;
+            background-size: cover;
+            overflow: hidden;
+            border-radius: 8px;
+            img {
+                &:hover {
+                    transform: scale(1.05);
+                    transition-duration: 300ms;
+                }
+            }
+            &:hover {
+                box-shadow: 0 0 20px 0 rgb(130 205 232);
+                filter: brightness(1) saturate(110%);
+            }
+            &-new {
+                position: absolute;
+                top: 0;
+                right: 0;
+                color: #fff;
+                border-radius: 0 5px 0 5px;
+                padding: 0px 5px;
+                background: #f96518;
+                z-index: 1;
+                font-size: 12px;
+            }
+            &-douban {
+                position: absolute;
+                top: 5px;
+                left: 5px;
+                z-index: 1;
+                background: #41ac52;
+                padding: 0 5px;
+                pointer-events: none;
+                color: #fff;
+                font-weight: 500;
+                font-size: 12px;
+                border-radius: 2px;
+            }
+            &-remarks {
+                position: absolute;
+                right: 10px;
+                bottom: 3px;
+                z-index: 1;
+                pointer-events: none;
+                color: #fff;
+                font-weight: 600;
+            }
+            &-pic {
+                position: absolute !important;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+        }
+        &-info {
+            margin-top: 12px;
+            width: 100%;
+            &-title {
+                text-align: center;
+                font-size: 14px;
+                display: block;
+                text-overflow: ellipsis;
+                overflow: hidden;
+                white-space: nowrap;
+                cursor: pointer;
+                &:hover {
+                    color: skyblue;
+                }
+            }
+        }
+    }
+}

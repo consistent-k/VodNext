@@ -1,0 +1,22 @@
+.vod-next-detail {
+    height: 100%;
+    width: 100%;
+    padding: 20px;
+    &-playlist {
+        margin-bottom: 16px;
+    }
+    &-info {
+        position: relative;
+        &-poster {
+            position: relative;
+            z-index: 10;
+            border-radius: 8px;
+            img {
+                width: 100%;
+                height: 100%;
+                border-radius: 8px;
+                object-fit: cover;
+            }
+        }
+    }
+}
