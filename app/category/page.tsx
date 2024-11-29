@@ -61,12 +61,8 @@ const CategoryPage = () => {
 
     useEffect(() => {
         if (typeof id === 'string' && id) {
-            getCategory(id);
+            getCategory(id, filters);
         }
-    }, [id]);
-
-    useEffect(() => {
-        getCategory(id, filters);
     }, [filters, id]);
 
     const currentData: HomeData | undefined = useMemo(() => {
