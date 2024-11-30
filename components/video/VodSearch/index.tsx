@@ -4,7 +4,7 @@ import { debounce, trim } from 'lodash';
 import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
 
-import VodList from '../VodList';
+import VodList, { VodListProps } from '../VodList';
 import SearchIcon from '@/components/icons/SearchIcon';
 import useIsMobile from '@/lib/hooks/useIsMobile';
 import { SearchData } from '@/lib/types';
@@ -19,12 +19,12 @@ interface SearchContentProps {
     site: string;
     onCancel: () => void;
     style?: React.CSSProperties;
+    onItemClick?: VodListProps['onItemClick'];
 }
 
 const SearchContent: React.FC<SearchContentProps> = (props) => {
-    const { site, onCancel, style } = props;
+    const { site, onCancel, style, onItemClick } = props;
     const { token } = theme.useToken();
-    const router = useRouter();
     const [value, setValue] = useState('');
     const [dataSource, setDataSource] = useState<SearchData[]>([]);
     const [loading, setLoading] = useState(false);
@@ -77,12 +77,6 @@ const SearchContent: React.FC<SearchContentProps> = (props) => {
                                     }}
                                 />
                             }
-                            onClick={() => {
-                                if (!trim(value)) {
-                                    return;
-                                }
-                                router.push(`/search?keyword=${value}&site=${site}`);
-                            }}
                             type="text"
                         ></Button>
                     }
@@ -90,6 +84,9 @@ const SearchContent: React.FC<SearchContentProps> = (props) => {
                 />
                 <Button
                     onClick={() => {
+                        if (!trim(value)) {
+                            return;
+                        }
                         getSearchData(value);
                     }}
                     type="primary"
@@ -106,7 +103,16 @@ const SearchContent: React.FC<SearchContentProps> = (props) => {
             </Flex>
 
             <div style={{ height: 'calc(100% - 60px)', overflowY: 'auto', padding: '0 16px 16px 16px' }}>
-                {loading ? <Spin tip="搜索中" fullscreen /> : <VodList dataSource={dataSource} site={site}></VodList>}
+                {loading ? (
+                    <Spin tip="搜索中" fullscreen />
+                ) : (
+                    <VodList
+                        dataSource={dataSource}
+                        onItemClick={(vod) => {
+                            onItemClick && onItemClick(vod);
+                        }}
+                    ></VodList>
+                )}
             </div>
         </Flex>
     );
@@ -119,6 +125,7 @@ const VodSearch: React.FC<VodSearchProps> = (props) => {
     const { isMobile } = useIsMobile();
 
     const [showSearch, setShowSearch] = useState(false);
+    const router = useRouter();
 
     useKeyPress(['meta.k'], () => {
         setShowSearch(true);
@@ -195,6 +202,10 @@ const VodSearch: React.FC<VodSearchProps> = (props) => {
                         onCancel={() => {
                             setShowSearch(false);
                         }}
+                        onItemClick={(vod) => {
+                            setShowSearch(false);
+                            router.push(`/detail?id=${encodeURIComponent(vod.vod_id as string)}&site=${site}`);
+                        }}
                         style={{
                             height: '100%',
                             overflowY: 'auto'
@@ -224,6 +235,10 @@ const VodSearch: React.FC<VodSearchProps> = (props) => {
                         site={site}
                         onCancel={() => {
                             setShowSearch(false);
+                        }}
+                        onItemClick={(vod) => {
+                            setShowSearch(false);
+                            router.push(`/detail?id=${encodeURIComponent(vod.vod_id as string)}&site=${site}`);
                         }}
                     ></SearchContent>
                 </Modal>

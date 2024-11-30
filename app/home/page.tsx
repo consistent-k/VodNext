@@ -1,6 +1,7 @@
 'use client';
 import { Col, Flex, Row, Spin } from 'antd';
 import { uniq } from 'lodash';
+import { useRouter } from 'next/navigation';
 import React, { Fragment, useCallback, useEffect, useState } from 'react';
 import store from 'store2';
 
@@ -14,6 +15,8 @@ const HomePage: React.FC = () => {
     const [homeVodTypes, setHomeVodTypes] = useState<string[]>([]);
     const [loading, setLoading] = useState(true);
     const currentSite = store.get('vod_next_current_site');
+
+    const router = useRouter();
 
     const getHomeVod = useCallback(async (site: string) => {
         try {
@@ -49,7 +52,12 @@ const HomePage: React.FC = () => {
                                             <div className={styles['vod-next-home-title']}>{item}</div>
                                         </Col>
                                     </Row>
-                                    <VodList site={currentSite} dataSource={homeVodData.filter((mItem) => mItem.type_name === item)}></VodList>
+                                    <VodList
+                                        dataSource={homeVodData.filter((mItem) => mItem.type_name === item)}
+                                        onItemClick={(vod) => {
+                                            router.push(`/detail?id=${encodeURIComponent(vod.vod_id as string)}&site=${currentSite}`);
+                                        }}
+                                    ></VodList>
                                 </Fragment>
                             );
                         })
