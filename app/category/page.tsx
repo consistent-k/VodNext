@@ -150,7 +150,12 @@ const CategoryPage = () => {
                         />
                     ) : null}
 
-                    <VodList dataSource={categoryList} site={site}></VodList>
+                    <VodList
+                        dataSource={categoryList}
+                        onItemClick={(vod) => {
+                            router.push(`/detail?id=${encodeURIComponent(vod.vod_id as string)}&site=${site}`);
+                        }}
+                    ></VodList>
                 </>
             )}
         </div>

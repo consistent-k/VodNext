@@ -5,13 +5,13 @@ import { useRouter } from 'next/navigation';
 import styles from './index.module.scss';
 import { CategoryVodData, HomeVodData, SearchData } from '@/lib/types';
 
-interface VodListProps {
+export interface VodListProps {
     dataSource: HomeVodData[] | SearchData[] | CategoryVodData[];
-    site: string;
+    onItemClick?: (vod: HomeVodData | SearchData | CategoryVodData) => void;
 }
 
 const VodList: React.FC<VodListProps> = (props) => {
-    const { dataSource = [], site } = props;
+    const { dataSource = [], onItemClick } = props;
     const router = useRouter();
 
     const widthMap = {
@@ -39,7 +39,7 @@ const VodList: React.FC<VodListProps> = (props) => {
                                     width: 100
                                 }}
                                 onClick={() => {
-                                    router.push(`/detail?id=${encodeURIComponent(vod.vod_id as string)}&site=${site}`);
+                                    onItemClick && onItemClick(vod);
                                 }}
                                 className={styles['vod-list-item']}
                             >
