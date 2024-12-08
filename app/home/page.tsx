@@ -3,10 +3,10 @@ import { Col, Flex, Row, Spin } from 'antd';
 import { uniq } from 'lodash';
 import { useRouter } from 'next/navigation';
 import React, { Fragment, useCallback, useEffect, useState } from 'react';
-import store from 'store2';
 
 import styles from './index.module.scss';
 import VodList from '@/components/video/VodList';
+import useSettingStore from '@/lib/store/useSettingStore';
 import { HomeVodData } from '@/lib/types';
 import { homeVodApi } from '@/services';
 
@@ -14,7 +14,7 @@ const HomePage: React.FC = () => {
     const [homeVodData, setHomeVodData] = useState<HomeVodData[]>([]);
     const [homeVodTypes, setHomeVodTypes] = useState<string[]>([]);
     const [loading, setLoading] = useState(true);
-    const currentSite = store.get('vod_next_current_site');
+    const { current_site } = useSettingStore();
 
     const router = useRouter();
 
@@ -34,8 +34,8 @@ const HomePage: React.FC = () => {
     }, []);
 
     useEffect(() => {
-        getHomeVod(currentSite);
-    }, [currentSite, getHomeVod]);
+        getHomeVod(current_site);
+    }, [current_site, getHomeVod]);
 
     return (
         <div className={styles['vod-next-home']}>
@@ -55,7 +55,7 @@ const HomePage: React.FC = () => {
                                     <VodList
                                         dataSource={homeVodData.filter((mItem) => mItem.type_name === item)}
                                         onItemClick={(vod) => {
-                                            router.push(`/detail?id=${encodeURIComponent(vod.vod_id as string)}&site=${currentSite}`);
+                                            router.push(`/detail?id=${encodeURIComponent(vod.vod_id as string)}&site=${current_site}`);
                                         }}
                                     ></VodList>
                                 </Fragment>

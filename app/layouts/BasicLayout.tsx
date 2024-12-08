@@ -3,17 +3,17 @@ import { Layout } from 'antd';
 import dayjs from 'dayjs';
 import { usePathname } from 'next/navigation';
 import React, { PropsWithChildren, useMemo } from 'react';
-import store from 'store2';
 
 import Disclaimer from './components/Disclaimer';
 import SiteHeader from './components/SiteHeader';
 import VodTypes from '@/components/video/VodTypes';
+import useSettingStore from '@/lib/store/useSettingStore';
 const { Content, Footer } = Layout;
 
 const BasicLayout: React.FC<PropsWithChildren> = ({ children }) => {
     const pathname = usePathname();
 
-    const currentSite = store.get('vod_next_current_site');
+    const { current_site } = useSettingStore();
 
     // 是否是配置页面
     const isSettingPage = useMemo(() => {
@@ -40,7 +40,7 @@ const BasicLayout: React.FC<PropsWithChildren> = ({ children }) => {
             <Disclaimer></Disclaimer>
             {!isSettingPage && <SiteHeader></SiteHeader>}
             <Content style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
-                {showVodTypes && <VodTypes site={currentSite}></VodTypes>}
+                {showVodTypes && <VodTypes site={current_site}></VodTypes>}
                 <div style={{ flex: 1, overflowY: 'auto' }}>{children}</div>
             </Content>
             <Footer style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: 30 }}>©{dayjs().year()} VodNext 仅供学习交流使用</Footer>

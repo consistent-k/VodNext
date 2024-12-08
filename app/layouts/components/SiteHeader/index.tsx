@@ -1,7 +1,6 @@
 import { MoonOutlined, SettingOutlined, SunOutlined } from '@ant-design/icons';
 import { Button, Flex, Layout } from 'antd';
 import { useRouter } from 'next/navigation';
-import store from 'store2';
 
 import styles from './index.module.scss';
 import VodSearch from '@/components/video/VodSearch';
@@ -16,7 +15,7 @@ const SiteHeader = () => {
     const { isDarkMode, toggleTheme } = useThemeStore();
     const router = useRouter();
 
-    const currentSite = store.get('vod_next_current_site');
+    const { current_site, setting, updateSetting } = useSettingStore();
 
     const { site_name } = useSettingStore();
 
@@ -36,15 +35,15 @@ const SiteHeader = () => {
                 </Flex>
                 <VodSites
                     options={sites}
-                    value={currentSite}
+                    value={current_site}
                     onChange={(value) => {
-                        store.set('vod_next_current_site', value);
+                        updateSetting({ ...setting, current_site: value });
                         window.location.href = '/home';
                     }}
                 />
             </Flex>
             <Flex gap={10}>
-                <VodSearch site={currentSite} />
+                <VodSearch site={current_site} />
                 <Flex>
                     <Button type="text" style={{ fontSize: 14 }} icon={isDarkMode ? <SunOutlined /> : <MoonOutlined />} onClick={toggleTheme} />
                     <Button

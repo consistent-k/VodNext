@@ -10,17 +10,17 @@ import { useVodSitesStore } from '@/lib/store/useVodSitesStore';
 
 
 export function InitProvider({ children }: { children: React.ReactNode }) {
-    const { getVodTypes, isInitialized } = useVodSitesStore();
+    const { getVodTypes, isInitialized, hasError } = useVodSitesStore();
     const { vod_hub_api } = useSettingStore();
 
     const router = useRouter();
     const pathname = usePathname();
 
     useEffect(() => {
-        if (!vod_hub_api) {
+        if (!vod_hub_api || hasError) {
             router.push('/setting');
         }
-    }, [vod_hub_api, router]);
+    }, [vod_hub_api, router, hasError]);
 
 
     useEffect(() => {
