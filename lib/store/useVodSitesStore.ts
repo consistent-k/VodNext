@@ -2,10 +2,10 @@ import { SelectProps } from 'antd';
 import store from 'store2';
 import { create } from 'zustand';
 
-import { DEFALUT_SITE_NAME } from '../constant/site';
 import { namespaceApi } from '@/services';
 
 interface VodSitesStore {
+    hasError: boolean; // 是否有错误
     isInitialized: boolean; // 是否初始化
     sites: SelectProps['options'];
     setSites: (sites: VodSitesStore['sites']) => void;
@@ -16,6 +16,7 @@ const CACHE_KEY = 'vod_next_sites';
 const CACHE_DURATION = 1000 * 60 * 60; // 1小时
 
 export const useVodSitesStore = create<VodSitesStore>((set) => ({
+    hasError: false,
     isInitialized: false,
     sites: [],
     setSites: (sites) => set({ sites }),
@@ -39,21 +40,14 @@ export const useVodSitesStore = create<VodSitesStore>((set) => ({
                 });
             });
 
-            const currentSite = store.get('vod_next_current_site');
-
-            if (!currentSite) {
-                store.set('vod_next_current_site', DEFALUT_SITE_NAME);
-            }
-
             store.set(CACHE_KEY, {
                 data: newSites,
                 timestamp: Date.now()
             });
-            set({ sites: newSites, isInitialized: true });
+            set({ sites: newSites, isInitialized: true, hasError: false });
         } catch (error) {
+            set({ isInitialized: false, hasError: true });
             throw error;
-        } finally {
-            set({ isInitialized: true });
         }
     }
 }));

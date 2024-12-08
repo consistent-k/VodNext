@@ -54,8 +54,6 @@
         "depends": []
       }
     },
-    "android": {
-      "minSdkVersion": 28
-    }
+    "android": {}
   }
 }
