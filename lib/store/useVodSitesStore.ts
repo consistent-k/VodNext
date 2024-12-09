@@ -2,23 +2,28 @@ import { SelectProps } from 'antd';
 import store from 'store2';
 import { create } from 'zustand';
 
-import { DEFALUT_SITE_NAME } from '../constant/site';
 import { namespaceApi } from '@/services';
 
 interface VodSitesStore {
+    hasError: boolean; // 是否有错误
+    errorMessage?: string;
     isInitialized: boolean; // 是否初始化
     sites: SelectProps['options'];
     setSites: (sites: VodSitesStore['sites']) => void;
     getVodTypes: () => Promise<void>;
+    resetError: () => void;
 }
 
 const CACHE_KEY = 'vod_next_sites';
 const CACHE_DURATION = 1000 * 60 * 60; // 1小时
 
 export const useVodSitesStore = create<VodSitesStore>((set) => ({
+    hasError: false,
+    errorMessage: undefined,
     isInitialized: false,
     sites: [],
     setSites: (sites) => set({ sites }),
+    resetError: () => set({ hasError: false, errorMessage: undefined }),
     getVodTypes: async () => {
         // 检查缓存
         const cached = store.get(CACHE_KEY);
@@ -39,21 +44,14 @@ export const useVodSitesStore = create<VodSitesStore>((set) => ({
                 });
             });
 
-            const currentSite = store.get('vod_next_current_site');
-
-            if (!currentSite) {
-                store.set('vod_next_current_site', DEFALUT_SITE_NAME);
-            }
-
             store.set(CACHE_KEY, {
                 data: newSites,
                 timestamp: Date.now()
             });
-            set({ sites: newSites, isInitialized: true });
+            set({ sites: newSites, isInitialized: true, hasError: false, errorMessage: undefined });
         } catch (error) {
+            set({ isInitialized: false, hasError: true, errorMessage: error instanceof Error ? error.message : '未知错误' });
             throw error;
-        } finally {
-            set({ isInitialized: true });
         }
     }
 }));

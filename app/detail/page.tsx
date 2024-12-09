@@ -3,7 +3,7 @@ import { Descriptions, Flex, message, Select, Spin, Tag, Typography } from 'antd
 import { includes } from 'lodash';
 import dynamic from 'next/dynamic';
 import { useRouter, useSearchParams } from 'next/navigation';
-import React, { Suspense, useEffect, useMemo, useState } from 'react';
+import React, { Suspense, useEffect, useMemo, useRef, useState } from 'react';
 
 import styles from './index.module.scss';
 import { PalyerProps } from '@/components/video/VodPalyer';
@@ -20,7 +20,8 @@ const DetailPage: React.FC = () => {
     const router = useRouter();
     const id = searchParams.get('id') || '';
     const site = searchParams.get('site') || '';
-    const { isMobile } = useIsMobile();
+    const ref = useRef<HTMLDivElement>(null);
+    const { isMobile } = useIsMobile(ref.current);
 
     const [movieDetail, setMovieDetail] = useState<DetailData>();
     const [activePlayList, setActivePlayList] = useState<VodPlayList>();
@@ -112,7 +113,7 @@ const DetailPage: React.FC = () => {
     };
 
     return (
-        <div className={styles['vod-next-detail']}>
+        <div className={styles['vod-next-detail']} ref={ref}>
             {contextHolder}
 
             <Flex vertical={isMobile}>
