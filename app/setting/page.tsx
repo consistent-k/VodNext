@@ -2,7 +2,7 @@
 import { InfoCircleOutlined, SettingOutlined } from '@ant-design/icons';
 import { Form, Input, Button, message, Menu, MenuProps, Flex, Switch, Select } from 'antd';
 import { isBoolean } from 'lodash';
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 
 import styles from './index.module.scss';
 import AtomIcon from '@/components/icons/AtomIcon';
@@ -26,7 +26,8 @@ const SettingPage: React.FC = () => {
     const { vod_hub_api, site_name, current_site, setting, updateSetting } = useSettingStore();
     const [form] = Form.useForm();
     const { isDarkMode, toggleTheme } = useThemeStore();
-    const { isMobile } = useIsMobile();
+    const ref = useRef<HTMLDivElement>(null);
+    const { isMobile } = useIsMobile(ref.current);
 
     const { getVodTypes, sites, isInitialized, hasError } = useVodSitesStore();
 
@@ -74,7 +75,7 @@ const SettingPage: React.FC = () => {
     };
 
     return (
-        <Flex className={styles['vod-next-setting']}>
+        <Flex className={styles['vod-next-setting']} ref={ref}>
             {contextHolder}
             <Menu
                 inlineCollapsed={isMobile}
@@ -96,14 +97,18 @@ const SettingPage: React.FC = () => {
                         current_site: current_site || ''
                     }}
                     requiredMark={false}
-                    onValuesChange={(values) => {
-                        // 判断如果是主题修改则直接调用
-                        if (isBoolean(values.theme)) {
-                            toggleTheme();
+                    onValuesChange={(changedValues) => {
+                        if ('theme' in changedValues) {
+                            // 判断如果是主题修改则直接调用
+                            if (isBoolean(changedValues.theme)) {
+                                toggleTheme();
+                            }
                         }
 
-                        if (values.current_site) {
-                            updateSetting({ ...setting, current_site: values.current_site });
+                        if ('current_site' in changedValues) {
+                            if (changedValues.current_site) {
+                                updateSetting({ ...setting, current_site: changedValues.current_site });
+                            }
                         }
                     }}
                 >
