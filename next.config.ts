@@ -1,13 +1,13 @@
+import { NextConfig } from 'next';
 import webpack from 'webpack';
 
-const mode = process.env.BUILD_MODE ?? 'standalone';
+const mode: NextConfig['output'] = process.env.BUILD_MODE as NextConfig['output'] ?? 'standalone';
 console.log('[Next] build mode', mode);
 
 const disableChunk = !!process.env.DISABLE_CHUNK || mode === 'export';
 console.log('[Next] build with chunk: ', !disableChunk);
 
-/** @type {import('next').NextConfig} */
-const nextConfig = {
+const nextConfig: NextConfig = {
     webpack(config) {
         if (disableChunk) {
             config.plugins.push(new webpack.optimize.LimitChunkCountPlugin({ maxChunks: 1 }));
@@ -32,23 +32,6 @@ const nextConfig = {
         silenceDeprecations: ['legacy-js-api'],
     }
 };
-
-const CorsHeaders = [
-    { key: 'Access-Control-Allow-Credentials', value: 'true' },
-    { key: 'Access-Control-Allow-Origin', value: '*' },
-    {
-        key: 'Access-Control-Allow-Methods',
-        value: '*'
-    },
-    {
-        key: 'Access-Control-Allow-Headers',
-        value: '*'
-    },
-    {
-        key: 'Access-Control-Max-Age',
-        value: '86400'
-    }
-];
 
 if (mode !== 'export') {
     nextConfig.redirects = async () => [

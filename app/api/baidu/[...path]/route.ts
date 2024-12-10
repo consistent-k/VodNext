@@ -120,4 +120,5 @@ async function request(req: NextRequest) {
 export const GET = handle;
 export const POST = handle;
 
+export const dynamic = 'force-static';
 export const runtime = 'edge';
