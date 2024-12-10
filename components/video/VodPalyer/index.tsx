@@ -16,7 +16,7 @@ export interface PalyerProps {
 const VodPalyer: React.FC<PalyerProps> = (props) => {
     const { url, onError, style, showType = 'dplayer' } = props;
 
-    const dpInstanceRef = useRef<DPlayer>();
+    const dpInstanceRef = useRef<DPlayer>(null);
     const dplayerRef = useRef<HTMLDivElement | null>(null);
     const video_type = url.indexOf('.m3u8') !== -1 ? 'customHls' : 'auto';
 
