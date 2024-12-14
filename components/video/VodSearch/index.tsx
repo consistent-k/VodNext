@@ -122,7 +122,7 @@ const VodSearch: React.FC<VodSearchProps> = (props) => {
     const { style, site } = props;
 
     const { token } = theme.useToken();
-    const { isMobile } = useIsMobile(document.body);
+    const { isMobile } = useIsMobile();
 
     const [showSearch, setShowSearch] = useState(false);
     const router = useRouter();
