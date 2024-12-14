@@ -1,8 +1,9 @@
 'use client';
 import { InfoCircleOutlined, SettingOutlined } from '@ant-design/icons';
-import { Form, Input, Button, message, Menu, MenuProps, Flex, Switch, Select } from 'antd';
+import { Form, Input, Button, message, Menu, MenuProps, Flex, Switch, Select, Space, Modal } from 'antd';
 import { isBoolean } from 'lodash';
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
+import store from 'store2';
 
 import styles from './index.module.scss';
 import AtomIcon from '@/components/icons/AtomIcon';
@@ -26,8 +27,7 @@ const SettingPage: React.FC = () => {
     const { vod_hub_api, site_name, current_site, setting, updateSetting } = useSettingStore();
     const [form] = Form.useForm();
     const { isDarkMode, toggleTheme } = useThemeStore();
-    const ref = useRef<HTMLDivElement>(null);
-    const { isMobile } = useIsMobile(ref.current);
+    const { isMobile } = useIsMobile();
 
     const { getVodTypes, sites, isInitialized, hasError } = useVodSitesStore();
 
@@ -75,7 +75,7 @@ const SettingPage: React.FC = () => {
     };
 
     return (
-        <Flex className={styles['vod-next-setting']} ref={ref}>
+        <Flex className={styles['vod-next-setting']}>
             {contextHolder}
             <Menu
                 inlineCollapsed={isMobile}
@@ -208,14 +208,34 @@ const SettingPage: React.FC = () => {
                     )}
 
                     <Form.Item>
-                        <Button
-                            type="primary"
-                            onClick={() => {
-                                handleSubmit();
-                            }}
-                        >
-                            保存配置
-                        </Button>
+                        <Space>
+                            <Button
+                                onClick={() => {
+                                    Modal.confirm({
+                                        title: '确认清空缓存？',
+                                        content: '清空缓存后需要重新配置相关设置',
+                                        onOk: () => {
+                                            store.each((key, value) => {
+                                                if (key.startsWith('vod_next')) {
+                                                    store.remove(key);
+                                                }
+                                            });
+                                            messageApi.success('缓存已清空');
+                                        }
+                                    });
+                                }}
+                            >
+                                清空缓存
+                            </Button>
+                            <Button
+                                type="primary"
+                                onClick={() => {
+                                    handleSubmit();
+                                }}
+                            >
+                                保存配置
+                            </Button>
+                        </Space>
                     </Form.Item>
                 </Form>
             </Flex>
