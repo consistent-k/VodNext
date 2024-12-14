@@ -1,6 +1,6 @@
 'use client';
 import { InfoCircleOutlined, SettingOutlined } from '@ant-design/icons';
-import { Form, Input, Button, message, Menu, MenuProps, Flex, Switch, Select, Space } from 'antd';
+import { Form, Input, Button, message, Menu, MenuProps, Flex, Switch, Select, Space, Modal } from 'antd';
 import { isBoolean } from 'lodash';
 import React, { useState } from 'react';
 import store from 'store2';
@@ -211,13 +211,18 @@ const SettingPage: React.FC = () => {
                         <Space>
                             <Button
                                 onClick={() => {
-                                    store.each((key, value) => {
-                                        if (key.startsWith('vod_next')) {
-                                            store.remove(key);
+                                    Modal.confirm({
+                                        title: '确认清空缓存？',
+                                        content: '清空缓存后需要重新配置相关设置',
+                                        onOk: () => {
+                                            store.each((key, value) => {
+                                                if (key.startsWith('vod_next')) {
+                                                    store.remove(key);
+                                                }
+                                            });
+                                            messageApi.success('缓存已清空');
                                         }
                                     });
-                                    messageApi.success('缓存已清空');
-                                    window.location.reload();
                                 }}
                             >
                                 清空缓存
