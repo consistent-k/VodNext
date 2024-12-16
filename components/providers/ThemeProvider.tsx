@@ -33,7 +33,7 @@ export default function ThemeProvider({ children }: { children: React.ReactNode 
             prefixCls="vod-next"
             locale={zhCN}
         >
-            <App>
+            <App style={{ height: '100%', width: '100%' }}>
                 {children}
             </App>
         </ConfigProvider>
