@@ -1,6 +1,6 @@
 'use client';
 
-import { ConfigProvider, theme } from 'antd';
+import { App, ConfigProvider, theme } from 'antd';
 import zhCN from 'antd/lib/locale/zh_CN';
 
 import { useThemeStore } from '@/lib/store/useThemeStore';
@@ -33,7 +33,9 @@ export default function ThemeProvider({ children }: { children: React.ReactNode 
             prefixCls="vod-next"
             locale={zhCN}
         >
-            {children}
+            <App>
+                {children}
+            </App>
         </ConfigProvider>
     );
 }
