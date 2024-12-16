@@ -1,6 +1,6 @@
 'use client';
 import { InfoCircleOutlined, SettingOutlined } from '@ant-design/icons';
-import { Form, Input, Button, message, Menu, MenuProps, Flex, Switch, Select, Space, Modal } from 'antd';
+import { Form, Input, Button, Menu, MenuProps, Flex, Switch, Select, Space, App } from 'antd';
 import { isBoolean } from 'lodash';
 import React, { useState } from 'react';
 import store from 'store2';
@@ -31,26 +31,26 @@ const SettingPage: React.FC = () => {
 
     const { getVodTypes, sites, isInitialized, hasError } = useVodSitesStore();
 
-    const [messageApi, contextHolder] = message.useMessage();
+    const { message, modal } = App.useApp();
 
     const [isGenerating, setIsGenerating] = useState(false); // 是否正在生成网站名称
 
     const handleSubmit = async () => {
         try {
             if (!isInitialized) {
-                messageApi.warning('请先点击测试接口后保存配置');
+                message.warning('请先点击测试接口后保存配置');
                 return;
             }
 
             if (hasError) {
-                messageApi.warning('VodHub API 配置错误，请修改后重新点击接口测试');
+                message.warning('VodHub API 配置错误，请修改后重新点击接口测试');
                 return;
             }
 
             await form.validateFields();
             const values = form.getFieldsValue();
             updateSetting(values);
-            messageApi.success('保存配置成功');
+            message.success('保存配置成功');
             window.location.href = '/home';
         } catch (error) {
             console.error(error);
@@ -65,10 +65,10 @@ const SettingPage: React.FC = () => {
             if (result.length < 8) {
                 form.setFieldValue('site_name', result);
             } else {
-                messageApi.info('获取网站名称失败');
+                message.info('获取网站名称失败');
             }
         } catch (error) {
-            messageApi.info('获取网站名称失败');
+            message.info('获取网站名称失败');
         } finally {
             setIsGenerating(false);
         }
@@ -76,7 +76,6 @@ const SettingPage: React.FC = () => {
 
     return (
         <Flex className={styles['vod-next-setting']}>
-            {contextHolder}
             <Menu
                 inlineCollapsed={isMobile}
                 style={{
@@ -182,7 +181,7 @@ const SettingPage: React.FC = () => {
                                         try {
                                             await getVodTypes();
                                         } catch (error) {
-                                            messageApi.error('测试接口失败');
+                                            message.error('测试接口失败');
                                         }
                                     }}
                                 >
@@ -211,7 +210,7 @@ const SettingPage: React.FC = () => {
                         <Space>
                             <Button
                                 onClick={() => {
-                                    Modal.confirm({
+                                    modal.confirm({
                                         title: '确认清空缓存？',
                                         content: '清空缓存后需要重新配置相关设置',
                                         onOk: () => {
@@ -220,7 +219,7 @@ const SettingPage: React.FC = () => {
                                                     store.remove(key);
                                                 }
                                             });
-                                            messageApi.success('缓存已清空');
+                                            message.success('缓存已清空');
                                         }
                                     });
                                 }}

@@ -1,5 +1,5 @@
 'use client';
-import { Descriptions, Flex, message, Select, Spin, Tag, Typography } from 'antd';
+import { App, Descriptions, Flex, Select, Spin, Tag, Typography } from 'antd';
 import { includes } from 'lodash';
 import dynamic from 'next/dynamic';
 import { useRouter, useSearchParams } from 'next/navigation';
@@ -26,7 +26,7 @@ const DetailPage: React.FC = () => {
     const [activePlayList, setActivePlayList] = useState<VodPlayList>();
     const [activeUrl, setActiveUrl] = useState('');
 
-    const [messageApi, contextHolder] = message.useMessage();
+    const { message } = App.useApp();
 
     const [playerUrl, setPlayerUrl] = useState('');
 
@@ -90,7 +90,7 @@ const DetailPage: React.FC = () => {
                     setPlayerUrl(data[0].play_url);
                 }
             } else {
-                messageApi.error('播放失败, 清尝试更换播放线路');
+                message.error('播放失败, 清尝试更换播放线路');
             }
         } catch (error) {
             console.log(error);
@@ -113,13 +113,11 @@ const DetailPage: React.FC = () => {
 
     return (
         <div className={styles['vod-next-detail']}>
-            {contextHolder}
-
             <Flex vertical={isMobile}>
                 <DynamicPalyerWithNoSSR
                     url={playerUrl}
                     onError={(msg) => {
-                        messageApi.error(msg);
+                        message.error(msg);
                     }}
                     showType={playerShowType}
                     style={{ width: isMobile ? '100%' : 'calc(100% - 400px)' }}
