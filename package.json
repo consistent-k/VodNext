@@ -42,7 +42,7 @@
         "@types/dplayer": "^1.25.5",
         "@types/lodash": "^4.17.13",
         "@types/node": "^22",
-        "@types/react": "19.0.1",
+        "@types/react": "19.0.2",
         "@types/react-dom": "19.0.2",
         "commitizen": "^4.3.1",
         "cross-env": "^7.0.3",
