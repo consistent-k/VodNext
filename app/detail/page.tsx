@@ -31,7 +31,7 @@ const DetailPage: React.FC = () => {
     const [playerUrl, setPlayerUrl] = useState('');
 
     const playerShowType = useMemo(() => {
-        let showType: PalyerProps['showType'] = 'dplayer';
+        let showType: PalyerProps['showType'] = 'xgplayer';
         if (includes(playerUrl, '?url=')) {
             showType = 'iframe';
         }
