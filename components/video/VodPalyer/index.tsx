@@ -1,4 +1,5 @@
 'use client';
+import { useUnmount } from 'ahooks';
 import { useEffect, useRef } from 'react';
 import Player, { I18N } from 'xgplayer';
 import ZH from 'xgplayer/es/lang/zh-cn';
@@ -47,18 +48,20 @@ const VodPalyer: React.FC<PalyerProps> = (props) => {
         player.on('error', (e: any) => {
             onError && onError(e.message);
         });
-        xgInstanceRef.current = player;
-        return () => {
-            xgInstanceRef.current.destroy();
-        };
     }, [url]);
+
+    useUnmount(() => {
+        if (xgInstanceRef.current) {
+            xgInstanceRef.current.destroy();
+            xgInstanceRef.current = null;
+        }
+    });
 
     return (
         <div className={styles['vod-next-player']} style={{ ...style }}>
             {showType === 'xgplayer' ? (
                 <div
                     id="xgplayer"
-                    ref={xgInstanceRef}
                     style={{
                         height: '100%',
                         width: '100%'
