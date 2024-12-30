@@ -57,8 +57,8 @@ importers:
         specifier: ^1.83.0
         version: 1.83.0
       store2:
-        specifier: ^2.14.3
-        version: 2.14.3
+        specifier: ^2.14.4
+        version: 2.14.4
       valtio:
         specifier: ^2.1.2
         version: 2.1.2(@types/react@19.0.2)(react@19.0.0)
@@ -3113,8 +3113,8 @@ packages:
     resolution: {integrity: sha512-UcjcJOWknrNkF6PLX83qcHM6KHgVKNkV62Y8a5uYDVv9ydGQVwAHMKqHdJje1VTWpljG0WYpCDhrCdAOYH4TWg==}
     engines: {node: '>= 10.x'}
 
-  store2@2.14.3:
-    resolution: {integrity: sha512-4QcZ+yx7nzEFiV4BMLnr/pRa5HYzNITX2ri0Zh6sT9EyQHbBHacC6YigllUPU9X3D0f/22QCgfokpKs52YRrUg==}
+  store2@2.14.4:
+    resolution: {integrity: sha512-srTItn1GOvyvOycgxjAnPA63FZNwy0PTyUBFMHRM+hVFltAeoh0LmNBz9SZqUS9mMqGk8rfyWyXn3GH5ReJ8Zw==}
 
   streamsearch@1.1.0:
     resolution: {integrity: sha512-Mcc5wHehp9aXz1ax6bZUyY5afg9u2rv5cqQI3mRrYkGC8rW2hM02jWuwjtL++LS5qinSyhj2QfLyNsuc+VsExg==}
@@ -6843,7 +6843,7 @@ snapshots:
 
   split2@4.2.0: {}
 
-  store2@2.14.3: {}
+  store2@2.14.4: {}
 
   streamsearch@1.1.0: {}
 
