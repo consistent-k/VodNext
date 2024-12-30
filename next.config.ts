@@ -46,15 +46,7 @@ if (mode !== 'export') {
         {
             source: '/api/vodhub/:path*',
             destination: 'http://127.0.0.1:8888/api/vodhub/:path*',
-        },
-        {
-            source: '/jiexi/FF/:path*',
-            destination: 'http://43.248.187.19:88/jiexi/FF/:path*',
-        },
-        {
-            source: '/jiexi/LZ/:path*',
-            destination: 'http://43.248.187.19:88/jiexi/LZ/:path*',
-        },
+        }
     ];
 }
 

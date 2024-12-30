@@ -81,14 +81,7 @@ const DetailPage: React.FC = () => {
             });
             const { data, code } = res;
             if (code === 0 && data.length > 0) {
-                const parseurl = new URL(data[0].play_url);
-                if (includes(parseurl.pathname, '/jiexi/FF')) {
-                    setPlayerUrl(parseurl.pathname);
-                } else if (includes(parseurl.pathname, '/jiexi/LZ')) {
-                    setPlayerUrl(parseurl.pathname);
-                } else {
-                    setPlayerUrl(data[0].play_url);
-                }
+                setPlayerUrl(data[0].play_url);
             } else {
                 message.error('播放失败, 清尝试更换播放线路');
             }
