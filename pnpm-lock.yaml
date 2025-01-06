@@ -61,7 +61,7 @@ importers:
         version: 2.14.4
       valtio:
         specifier: ^2.1.2
-        version: 2.1.2(@types/react@19.0.2)(react@19.0.0)
+        version: 2.1.2(@types/react@19.0.3)(react@19.0.0)
       xgplayer:
         specifier: ^3.1.0-alpha.8
         version: 3.1.0-alpha.9(core-js@3.39.0)
@@ -76,7 +76,7 @@ importers:
         version: 3.0.20(core-js@3.39.0)(xgplayer@3.1.0-alpha.9(core-js@3.39.0))
       zustand:
         specifier: ^5.0.2
-        version: 5.0.2(@types/react@19.0.2)(react@19.0.0)
+        version: 5.0.2(@types/react@19.0.3)(react@19.0.0)
     devDependencies:
       '@commitlint/cli':
         specifier: ^19.6.1
@@ -97,11 +97,11 @@ importers:
         specifier: ^22
         version: 22.10.5
       '@types/react':
-        specifier: 19.0.2
-        version: 19.0.2
+        specifier: 19.0.3
+        version: 19.0.3
       '@types/react-dom':
         specifier: 19.0.2
-        version: 19.0.2(@types/react@19.0.2)
+        version: 19.0.2(@types/react@19.0.3)
       commitizen:
         specifier: ^4.3.1
         version: 4.3.1(@types/node@22.10.5)(typescript@5.7.2)
@@ -786,8 +786,8 @@ packages:
     peerDependencies:
       '@types/react': ^19.0.0
 
-  '@types/react@19.0.2':
-    resolution: {integrity: sha512-USU8ZI/xyKJwFTpjSVIrSeHBVAGagkHQKPNbxeWwql/vDmnTIBgx+TJnhFnj1NXgz8XfprU0egV2dROLGpsBEg==}
+  '@types/react@19.0.3':
+    resolution: {integrity: sha512-UavfHguIjnnuq9O67uXfgy/h3SRJbidAYvNjLceB+2RIKVRBzVsh0QO+Pw6BCSQqFS9xwzKfwstXx0m6AbAREA==}
 
   '@typescript-eslint/eslint-plugin@8.14.0':
     resolution: {integrity: sha512-tqp8H7UWFaZj0yNO6bycd5YjMwxa6wIHOLZvWPkidwbgLCsBMetQoGj7DPuAlWa2yGO3H48xmPwjhsSPPCGU5w==}
@@ -4151,11 +4151,11 @@ snapshots:
     dependencies:
       undici-types: 6.20.0
 
-  '@types/react-dom@19.0.2(@types/react@19.0.2)':
+  '@types/react-dom@19.0.2(@types/react@19.0.3)':
     dependencies:
-      '@types/react': 19.0.2
+      '@types/react': 19.0.3
 
-  '@types/react@19.0.2':
+  '@types/react@19.0.3':
     dependencies:
       csstype: 3.1.3
 
@@ -7127,11 +7127,11 @@ snapshots:
 
   util-deprecate@1.0.2: {}
 
-  valtio@2.1.2(@types/react@19.0.2)(react@19.0.0):
+  valtio@2.1.2(@types/react@19.0.3)(react@19.0.0):
     dependencies:
       proxy-compare: 3.0.0
     optionalDependencies:
-      '@types/react': 19.0.2
+      '@types/react': 19.0.3
       react: 19.0.0
 
   watchpack@2.4.2:
@@ -7323,7 +7323,7 @@ snapshots:
 
   yocto-queue@1.1.1: {}
 
-  zustand@5.0.2(@types/react@19.0.2)(react@19.0.0):
+  zustand@5.0.2(@types/react@19.0.3)(react@19.0.0):
     optionalDependencies:
-      '@types/react': 19.0.2
+      '@types/react': 19.0.3
       react: 19.0.0
