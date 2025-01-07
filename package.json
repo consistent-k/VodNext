@@ -44,7 +44,7 @@
         "@types/crypto-js": "^4.2.2",
         "@types/lodash": "^4.17.14",
         "@types/node": "^22",
-        "@types/react": "19.0.2",
+        "@types/react": "19.0.3",
         "@types/react-dom": "19.0.2",
         "commitizen": "^4.3.1",
         "cross-env": "^7.0.3",
