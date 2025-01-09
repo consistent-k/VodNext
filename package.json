@@ -38,6 +38,7 @@
         "zustand": "^5.0.2"
     },
     "devDependencies": {
+        "@ant-design/v5-patch-for-react-19": "^1.0.3",
         "@commitlint/cli": "^19.6.1",
         "@commitlint/config-conventional": "^19.6.0",
         "@tauri-apps/cli": "^2.2.2",
@@ -71,5 +72,6 @@
         "commitizen": {
             "path": "./node_modules/cz-conventional-changelog"
         }
-    }
+    },
+    "packageManager": "pnpm@9.15.3"
 }

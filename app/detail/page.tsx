@@ -1,5 +1,5 @@
 'use client';
-import { App, Descriptions, Flex, Select, Spin, Tag, Typography } from 'antd';
+import { App, Descriptions, Flex, Select, Spin, Tag, theme, Typography } from 'antd';
 import { includes } from 'lodash';
 import dynamic from 'next/dynamic';
 import { useRouter, useSearchParams } from 'next/navigation';
@@ -27,22 +27,21 @@ const DetailPage: React.FC = () => {
     const [activeUrl, setActiveUrl] = useState('');
 
     const { message } = App.useApp();
+    const { token } = theme.useToken();
 
     const [playerUrl, setPlayerUrl] = useState('');
 
     const playerShowType = useMemo(() => {
-        let showType: PalyerProps['showType'] = 'xgplayer';
-        if (includes(playerUrl, '?url=')) {
-            showType = 'iframe';
+        let showType: PalyerProps['showType'] = 'iframe';
+        if (includes(playerUrl, 'm3u8')) {
+            showType = 'xgplayer';
         }
-
-        // 飞凡视频站点使用 iframe 播放
-        if (site === 'feifan') {
-            showType = 'iframe';
+        if (includes(playerUrl, 'mp4')) {
+            showType = 'xgplayer';
         }
 
         return showType;
-    }, [playerUrl, site]);
+    }, [playerUrl]);
 
     const handleDetail = async (id: string | number) => {
         try {
@@ -128,8 +127,10 @@ const DetailPage: React.FC = () => {
                         <Descriptions
                             title={<div>{movieDetail?.vod_name}</div>}
                             column={1}
-                            labelStyle={{
-                                minWidth: 80
+                            styles={{
+                                label: {
+                                    minWidth: 80
+                                }
                             }}
                         >
                             {CommonDescriptions()}
@@ -173,7 +174,7 @@ const DetailPage: React.FC = () => {
                                     cursor: 'pointer',
                                     width: 'calc(33.33% - 6px)',
                                     textAlign: 'center',
-                                    borderColor: activeUrl === item.url ? 'skyblue' : '',
+                                    borderColor: activeUrl === item.url ? token.colorPrimary : '',
                                     margin: 0,
                                     overflow: 'hidden',
                                     textOverflow: 'ellipsis',
@@ -196,8 +197,10 @@ const DetailPage: React.FC = () => {
                 <Descriptions
                     title={<div>{movieDetail?.vod_name}</div>}
                     column={1}
-                    labelStyle={{
-                        minWidth: 80
+                    styles={{
+                        label: {
+                            minWidth: 80
+                        }
                     }}
                     contentStyle={{}}
                 >

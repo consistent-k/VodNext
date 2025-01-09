@@ -13,12 +13,12 @@ export default function ThemeProvider({ children }: { children: React.ReactNode 
             theme={{
                 algorithm: isDarkMode ? theme.darkAlgorithm : theme.defaultAlgorithm,
                 token: {
-                    colorPrimary: 'skyblue'
+                    colorPrimary: '#87CEEB',
                 },
                 components: {
                     Input: {
-                        hoverBorderColor: 'skyblue',
-                        activeBorderColor: 'skyblue'
+                        hoverBorderColor: '#87CEEB',
+                        activeBorderColor: '#87CEEB'
                     },
                     Layout: {
                         bodyBg: isDarkMode ? '#1a1c1f' : '#fff',
