@@ -8,6 +8,7 @@ import ThemeProvider from '@/components/providers/ThemeProvider';
 
 import './globals.scss';
 import 'antd/dist/reset.css';
+import '@ant-design/v5-patch-for-react-19';
 
 export const viewport: Viewport = {
     width: 'device-width',

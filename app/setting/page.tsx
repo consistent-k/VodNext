@@ -2,16 +2,14 @@
 import { InfoCircleOutlined, SettingOutlined } from '@ant-design/icons';
 import { Form, Input, Button, Menu, MenuProps, Flex, Switch, Select, Space, App } from 'antd';
 import { isBoolean } from 'lodash';
-import React, { useState } from 'react';
+import React from 'react';
 import store from 'store2';
 
 import styles from './index.module.scss';
-import AtomIcon from '@/components/icons/AtomIcon';
 import useIsMobile from '@/lib/hooks/useIsMobile';
 import useSettingStore from '@/lib/store/useSettingStore';
 import { useThemeStore } from '@/lib/store/useThemeStore';
 import { useVodSitesStore } from '@/lib/store/useVodSitesStore';
-import { getAISiteNameApi } from '@/services/baidu';
 
 type MenuItem = Required<MenuProps>['items'][number];
 
@@ -33,8 +31,6 @@ const SettingPage: React.FC = () => {
 
     const { message, modal } = App.useApp();
 
-    const [isGenerating, setIsGenerating] = useState(false); // 是否正在生成网站名称
-
     const handleSubmit = async () => {
         try {
             if (!isInitialized) {
@@ -54,23 +50,6 @@ const SettingPage: React.FC = () => {
             window.location.href = '/home';
         } catch (error) {
             console.error(error);
-        }
-    };
-
-    const getBaidu = async () => {
-        setIsGenerating(true);
-        try {
-            const response = await getAISiteNameApi();
-            const { result } = response;
-            if (result.length < 8) {
-                form.setFieldValue('site_name', result);
-            } else {
-                message.info('获取网站名称失败');
-            }
-        } catch (error) {
-            message.info('获取网站名称失败');
-        } finally {
-            setIsGenerating(false);
         }
     };
 
@@ -112,30 +91,7 @@ const SettingPage: React.FC = () => {
                     }}
                 >
                     <Form.Item label="网站名称" required name="site_name" rules={[{ required: true, message: '请输入网站名称' }]}>
-                        <Input
-                            placeholder="请输入网站名称"
-                            disabled={isGenerating}
-                            autoComplete="off"
-                            suffix={
-                                <Button
-                                    loading={isGenerating}
-                                    type="text"
-                                    style={{
-                                        margin: 0
-                                    }}
-                                    size="small"
-                                    icon={<AtomIcon />}
-                                    onClick={() => {
-                                        if (isGenerating) {
-                                            return;
-                                        }
-                                        getBaidu();
-                                    }}
-                                >
-                                    {isGenerating ? '生成中' : ''}
-                                </Button>
-                            }
-                        />
+                        <Input placeholder="请输入网站名称" autoComplete="off" />
                     </Form.Item>
 
                     <Form.Item label="网站主题" name="theme" valuePropName="checked">
