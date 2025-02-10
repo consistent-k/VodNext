@@ -6,16 +6,17 @@ FROM base AS deps
 
 WORKDIR /app
 
-ARG USE_CHINA_NPM_REGISTRY=1
+RUN npm install -g corepack
+
+# 启用 pnpm
+RUN corepack enable pnpm
+
 RUN \
     set -ex && \
-    corepack enable pnpm && \
-    if [ "$USE_CHINA_NPM_REGISTRY" = 1 ]; then \
-        echo 'use npm mirror' && \
-        npm config set registry https://registry.npmmirror.com && \
-        yarn config set registry https://registry.npmmirror.com && \
-        pnpm config set registry https://registry.npmmirror.com ; \
-    fi;
+    echo 'use npm mirror' && \
+    npm config set registry https://registry.npmmirror.com && \
+    yarn config set registry https://registry.npmmirror.com && \
+    pnpm config set registry https://registry.npmmirror.com
 
 
 COPY ./package.json /app/
