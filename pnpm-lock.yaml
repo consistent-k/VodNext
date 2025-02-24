@@ -18,8 +18,8 @@ importers:
         specifier: ~2.3.0
         version: 2.3.0
       '@tauri-apps/plugin-updater':
-        specifier: ~2.5.0
-        version: 2.5.0
+        specifier: ~2.5.1
+        version: 2.5.1
       ahooks:
         specifier: ^3.8.4
         version: 3.8.4(react@19.0.0)
@@ -764,8 +764,8 @@ packages:
   '@tauri-apps/plugin-http@2.3.0':
     resolution: {integrity: sha512-pigTvz+zzAqbIhCzRiR1GE98Jw7A03j2V+Eiexr9thBI8VfMiwFQMcbgON51xlwnVaI72LdbYKNajU84im8tlg==}
 
-  '@tauri-apps/plugin-updater@2.5.0':
-    resolution: {integrity: sha512-CWpwrkgpMESDPgJ0EuXgQTI/U9zeZQ9NLUvMyuWVrsuRez7tJ/3c7y73LAkvkI6+ekUxVaRJrxYrSfd8W+DRvQ==}
+  '@tauri-apps/plugin-updater@2.5.1':
+    resolution: {integrity: sha512-7fNJraKRbKkxguMY5lG2W20pBvAUkLu+cqnbu0UcK7DqeZgrAnNECcGBIDG6fJ6C+0fAp2V2dMIgznhffOBCcg==}
 
   '@types/conventional-commits-parser@5.0.1':
     resolution: {integrity: sha512-7uz5EHdzz2TqoMfV7ee61Egf5y6NkcO4FB/1iCCQnbeiI1F3xzv3vK5dBCXUCLQgGYS+mUeigK1iKQzvED+QnQ==}
@@ -4138,7 +4138,7 @@ snapshots:
     dependencies:
       '@tauri-apps/api': 2.2.0
 
-  '@tauri-apps/plugin-updater@2.5.0':
+  '@tauri-apps/plugin-updater@2.5.1':
     dependencies:
       '@tauri-apps/api': 2.2.0
 
