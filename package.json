@@ -34,7 +34,7 @@
         "xgplayer": "3.1.0-alpha.9",
         "xgplayer-flv": "^3.0.20",
         "xgplayer-hls": "^3.0.21",
-        "xgplayer-mp4": "^3.0.20",
+        "xgplayer-mp4": "^3.0.21",
         "zustand": "^5.0.3"
     },
     "devDependencies": {
