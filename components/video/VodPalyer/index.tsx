@@ -1,6 +1,6 @@
 'use client';
-import { useUnmount } from 'ahooks';
-import { useEffect, useRef } from 'react';
+import { useDeepCompareEffect, useUnmount } from 'ahooks';
+import { useRef } from 'react';
 import Player, { I18N } from 'xgplayer';
 import ZH from 'xgplayer/es/lang/zh-cn';
 import HlsPlugin from 'xgplayer-hls';
@@ -23,10 +23,13 @@ const VodPalyer: React.FC<PalyerProps> = (props) => {
 
     const xgInstanceRef = useRef<any>(null);
 
-    useEffect(() => {
+    useDeepCompareEffect(() => {
         if (!url) {
             return;
-        };
+        }
+        if (showType === 'iframe') {
+            return;
+        }
         let player = new Player({
             id: 'xgplayer',
             url,
@@ -48,7 +51,7 @@ const VodPalyer: React.FC<PalyerProps> = (props) => {
         player.on('error', (e: any) => {
             onError && onError(e.message);
         });
-    }, [url]);
+    }, [url, showType]);
 
     useUnmount(() => {
         if (xgInstanceRef.current) {

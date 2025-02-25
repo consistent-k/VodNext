@@ -202,7 +202,6 @@ const DetailPage: React.FC = () => {
                             minWidth: 80
                         }
                     }}
-                    contentStyle={{}}
                 >
                     <Descriptions.Item label="简介">
                         <Paragraph ellipsis={{ rows: isMobile ? 8 : 10, expandable: false }}>{movieDetail?.vod_content.trimStart()}</Paragraph>
