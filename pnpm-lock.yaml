@@ -66,8 +66,8 @@ importers:
         specifier: 3.1.0-alpha.9
         version: 3.1.0-alpha.9(core-js@3.39.0)
       xgplayer-flv:
-        specifier: ^3.0.20
-        version: 3.0.20(core-js@3.39.0)(xgplayer@3.1.0-alpha.9(core-js@3.39.0))
+        specifier: ^3.0.21
+        version: 3.0.21(core-js@3.39.0)(xgplayer@3.1.0-alpha.9(core-js@3.39.0))
       xgplayer-hls:
         specifier: ^3.0.21
         version: 3.0.21(core-js@3.39.0)(xgplayer@3.1.0-alpha.9(core-js@3.39.0))
@@ -3471,8 +3471,8 @@ packages:
   wrappy@1.0.2:
     resolution: {integrity: sha512-l4Sp/DRseor9wL6EvV2+TuQn63dMkPjZ/sp9XkghTEbV9KlPS1xUsZ3u7/IQO4wxtcFB4bgpQPRcR3QCvezPcQ==}
 
-  xgplayer-flv@3.0.20:
-    resolution: {integrity: sha512-iIF3COnIHB0SDmdZ6HRQ+Ve2p2K2acB7rfqsWLVbgGvhjLYFA/PqRS+4AdGQyg+yi87MnX4zsoho/I4M7rByFA==}
+  xgplayer-flv@3.0.21:
+    resolution: {integrity: sha512-M9HU8mqa22eW59P0hd4SjjeuPzjGYZiRsF6caIQFI+4wqlscn0+Q84od4HYZkHWUlXKeVcrhl/L/x8gf1NqibQ==}
     peerDependencies:
       core-js: '>=3.12.1'
       xgplayer: '>=3.0.1'
@@ -7329,13 +7329,13 @@ snapshots:
 
   wrappy@1.0.2: {}
 
-  xgplayer-flv@3.0.20(core-js@3.39.0)(xgplayer@3.1.0-alpha.9(core-js@3.39.0)):
+  xgplayer-flv@3.0.21(core-js@3.39.0)(xgplayer@3.1.0-alpha.9(core-js@3.39.0)):
     dependencies:
       core-js: 3.39.0
       eventemitter3: 4.0.7
       xgplayer: 3.1.0-alpha.9(core-js@3.39.0)
-      xgplayer-streaming-shared: 3.0.20(core-js@3.39.0)
-      xgplayer-transmuxer: 3.0.20(core-js@3.39.0)
+      xgplayer-streaming-shared: 3.0.21(core-js@3.39.0)
+      xgplayer-transmuxer: 3.0.21(core-js@3.39.0)
 
   xgplayer-hls@3.0.21(core-js@3.39.0)(xgplayer@3.1.0-alpha.9(core-js@3.39.0)):
     dependencies:
