@@ -67,7 +67,7 @@ importers:
         version: 4.0.15
       valtio:
         specifier: ^2.1.3
-        version: 2.1.3(@types/react@19.0.10)(react@19.0.0)
+        version: 2.1.3(@types/react@19.0.12)(react@19.0.0)
       xgplayer:
         specifier: 3.1.0-alpha.9
         version: 3.1.0-alpha.9(core-js@3.39.0)
@@ -82,7 +82,7 @@ importers:
         version: 3.0.21(core-js@3.39.0)(xgplayer@3.1.0-alpha.9(core-js@3.39.0))
       zustand:
         specifier: ^5.0.3
-        version: 5.0.3(@types/react@19.0.10)(react@19.0.0)
+        version: 5.0.3(@types/react@19.0.12)(react@19.0.0)
     devDependencies:
       '@ant-design/v5-patch-for-react-19':
         specifier: ^1.0.3
@@ -106,11 +106,11 @@ importers:
         specifier: ^22.13.10
         version: 22.13.10
       '@types/react':
-        specifier: 19.0.10
-        version: 19.0.10
+        specifier: 19.0.12
+        version: 19.0.12
       '@types/react-dom':
         specifier: 19.0.4
-        version: 19.0.4(@types/react@19.0.10)
+        version: 19.0.4(@types/react@19.0.12)
       commitizen:
         specifier: ^4.3.1
         version: 4.3.1(@types/node@22.13.10)(typescript@5.7.3)
@@ -907,8 +907,8 @@ packages:
     peerDependencies:
       '@types/react': ^19.0.0
 
-  '@types/react@19.0.10':
-    resolution: {integrity: sha512-JuRQ9KXLEjaUNjTWpzuR231Z2WpIwczOkBEIvbHNCzQefFIT0L8IqE6NV6ULLyC1SI/i234JnDoMkfg+RjQj2g==}
+  '@types/react@19.0.12':
+    resolution: {integrity: sha512-V6Ar115dBDrjbtXSrS+/Oruobc+qVbbUxDFC1RSbRqLt5SYvxxyIDrSC85RWml54g+jfNeEMZhEj7wW07ONQhA==}
 
   '@typescript-eslint/eslint-plugin@8.27.0':
     resolution: {integrity: sha512-4henw4zkePi5p252c8ncBLzLce52SEUz2Ebj8faDnuUXz2UuHEONYcJ+G0oaCF+bYCWVZtrGzq3FD7YXetmnSA==}
@@ -3332,9 +3332,6 @@ packages:
   tailwindcss@4.0.15:
     resolution: {integrity: sha512-6ZMg+hHdMJpjpeCCFasX7K+U615U9D+7k5/cDK/iRwl6GptF24+I/AbKgOnXhVKePzrEyIXutLv36n4cRsq3Sg==}
 
-  tailwindcss@4.0.8:
-    resolution: {integrity: sha512-Me7N5CKR+D2A1xdWA5t5+kjjT7bwnxZOE6/yDI/ixJdJokszsn2n++mdU5yJwrsTpqFX2B9ZNMBJDwcqk9C9lw==}
-
   tapable@2.2.1:
     resolution: {integrity: sha512-GNzQvQTOIP6RyTfE2Qxb8ZVlNmw0n88vp1szwWRimP02mnTsx3Wtn5qRdqY9w2XduFNUgvOwhNnQsjwCp+kqaQ==}
     engines: {node: '>=6'}
@@ -4355,11 +4352,11 @@ snapshots:
     dependencies:
       undici-types: 6.20.0
 
-  '@types/react-dom@19.0.4(@types/react@19.0.10)':
+  '@types/react-dom@19.0.4(@types/react@19.0.12)':
     dependencies:
-      '@types/react': 19.0.10
+      '@types/react': 19.0.12
 
-  '@types/react@19.0.10':
+  '@types/react@19.0.12':
     dependencies:
       csstype: 3.1.3
 
@@ -7174,8 +7171,6 @@ snapshots:
 
   tailwindcss@4.0.15: {}
 
-  tailwindcss@4.0.8: {}
-
   tapable@2.2.1: {}
 
   terser-webpack-plugin@5.3.11(webpack@5.98.0):
@@ -7302,11 +7297,11 @@ snapshots:
 
   util-deprecate@1.0.2: {}
 
-  valtio@2.1.3(@types/react@19.0.10)(react@19.0.0):
+  valtio@2.1.3(@types/react@19.0.12)(react@19.0.0):
     dependencies:
       proxy-compare: 3.0.1
     optionalDependencies:
-      '@types/react': 19.0.10
+      '@types/react': 19.0.12
       react: 19.0.0
 
   watchpack@2.4.2:
@@ -7494,7 +7489,7 @@ snapshots:
 
   yocto-queue@1.2.0: {}
 
-  zustand@5.0.3(@types/react@19.0.10)(react@19.0.0):
+  zustand@5.0.3(@types/react@19.0.12)(react@19.0.0):
     optionalDependencies:
-      '@types/react': 19.0.10
+      '@types/react': 19.0.12
       react: 19.0.0
