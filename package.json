@@ -32,7 +32,7 @@
         "sass": "^1.86.0",
         "store2": "^2.14.4",
         "tailwindcss": "^4.0.15",
-        "valtio": "^2.1.3",
+        "valtio": "^2.1.4",
         "xgplayer": "3.1.0-alpha.9",
         "xgplayer-flv": "^3.0.21",
         "xgplayer-hls": "^3.0.21",
