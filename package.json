@@ -46,7 +46,7 @@
         "@tauri-apps/cli": "^2.5.0",
         "@types/crypto-js": "^4.2.2",
         "@types/lodash": "^4.17.16",
-        "@types/node": "^22.15.14",
+        "@types/node": "^22.15.21",
         "@types/react": "19.0.12",
         "@types/react-dom": "19.0.4",
         "commitizen": "^4.3.1",
