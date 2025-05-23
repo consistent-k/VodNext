@@ -63,7 +63,7 @@
         "postcss": "^8.5.3",
         "prettier": "^3.5.3",
         "typescript": "^5.8.3",
-        "webpack": "^5.99.8"
+        "webpack": "^5.99.9"
     },
     "engines": {
         "node": ">=22"
