@@ -10,8 +10,9 @@ interface VodSitesStore {
     isInitialized: boolean; // 是否初始化
     sites: SelectProps['options'];
     setSites: (sites: VodSitesStore['sites']) => void;
-    getVodTypes: () => Promise<void>;
+    getVodTypes: (options: { force: boolean }) => Promise<void>;
     resetError: () => void;
+    clearVodTypes: () => void;
 }
 
 const CACHE_KEY = 'vod_next_sites';
@@ -24,14 +25,19 @@ export const useVodSitesStore = create<VodSitesStore>((set) => ({
     sites: [],
     setSites: (sites) => set({ sites }),
     resetError: () => set({ hasError: false, errorMessage: undefined }),
-    getVodTypes: async () => {
-        // 检查缓存
-        const cached = store.get(CACHE_KEY);
-        if (cached) {
-            const { data, timestamp } = cached;
-            if (Date.now() - timestamp < CACHE_DURATION) {
-                set({ sites: data, isInitialized: true });
-                return;
+    clearVodTypes: () => {
+        set({ sites: [], isInitialized: false, hasError: false });
+    },
+    getVodTypes: async ({ force = false }) => {
+        if (!force) {
+            // 检查缓存
+            const cached = store.get(CACHE_KEY);
+            if (cached) {
+                const { data, timestamp } = cached;
+                if (Date.now() - timestamp < CACHE_DURATION) {
+                    set({ sites: data, isInitialized: true });
+                    return;
+                }
             }
         }
         try {

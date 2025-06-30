@@ -7,8 +7,6 @@ import { useEffect } from 'react';
 import useSettingStore from '@/lib/store/useSettingStore';
 import { useVodSitesStore } from '@/lib/store/useVodSitesStore';
 
-
-
 export function InitProvider({ children }: { children: React.ReactNode }) {
     const { getVodTypes, isInitialized, hasError } = useVodSitesStore();
     const { vod_hub_api } = useSettingStore();
@@ -22,14 +20,15 @@ export function InitProvider({ children }: { children: React.ReactNode }) {
         }
     }, [vod_hub_api, router, hasError]);
 
-
     useEffect(() => {
         if (!isInitialized && pathname !== '/setting') {
-            getVodTypes()
+            getVodTypes({
+                force: false
+            });
         }
     }, [getVodTypes, isInitialized, pathname]);
 
-    if ((!isInitialized && pathname !== '/setting')) {
+    if (!isInitialized && pathname !== '/setting') {
         return <Spin fullscreen />;
     }
 
@@ -38,4 +37,4 @@ export function InitProvider({ children }: { children: React.ReactNode }) {
     }
 
     return <>{children}</>;
-} 
+}

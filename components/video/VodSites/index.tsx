@@ -16,8 +16,12 @@ const VodSites: React.FC<VodSitesProps> = (props) => {
         <div className={styles['vod-header-sites']}>
             {options && options.length > 0 && (
                 <Select
-                    dropdownStyle={{
-                        minWidth: 110
+                    styles={{
+                        popup: {
+                            root: {
+                                minWidth: 100
+                            }
+                        }
                     }}
                     options={options}
                     defaultActiveFirstOption
