@@ -3,8 +3,19 @@
     width: 100%;
     padding: 0 16px;
     &-title {
-        font-size: 20px;
-        margin-bottom: 16px;
-        margin-top: 16px;
+        font-size: 22px;
+        font-weight: 700;
+        color: #6366f1;
+        letter-spacing: 0.02em;
+        position: relative;
+        &::after {
+            content: '';
+            display: block;
+            width: 48px;
+            height: 4px;
+            border-radius: 2px;
+            background: linear-gradient(90deg, #6366f1 0%, #a5b4fc 100%);
+            margin-top: 0px;
+        }
     }
 }

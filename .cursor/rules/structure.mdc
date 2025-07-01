@@ -1,0 +1,14 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# 项目结构说明
+
+- 前端主入口为 [app/layout.tsx](mdc:app/layout.tsx)，页面路由位于 [app/](mdc:app) 目录下。
+- 公共组件存放在 [components/](mdc:components) 目录。
+- 样式文件主要在各自模块的 `index.module.scss` 文件中。
+- 全局类型定义在 [app/global.d.ts](mdc:app/global.d.ts) 和 [lib/types/](mdc:lib/types) 下。
+- 业务逻辑和工具函数在 [lib/](mdc:lib) 目录。
+- 服务端接口相关代码在 [services/](mdc:services) 目录。
+- Tauri 桌面端相关代码在 [src-tauri/](mdc:src-tauri) 目录。
