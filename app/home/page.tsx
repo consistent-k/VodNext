@@ -1,5 +1,5 @@
 'use client';
-import { Col, Flex, Row, Spin } from 'antd';
+import { Flex, Spin } from 'antd';
 import { uniq } from 'lodash';
 import { useRouter } from 'next/navigation';
 import React, { Fragment, useCallback, useEffect, useState } from 'react';
@@ -46,19 +46,15 @@ const HomePage: React.FC = () => {
                     {homeVodTypes?.length > 0 ? (
                         homeVodTypes.map((item, index) => {
                             return (
-                                <Fragment key={`${item}-${index.toString()}`}>
-                                    <Row>
-                                        <Col span={24}>
-                                            <div className={styles['vod-next-home-title']}>{item}</div>
-                                        </Col>
-                                    </Row>
+                                <Flex key={`${item}-${index.toString()}`} vertical gap={16}>
+                                    <div className={styles['vod-next-home-title']}>{item}</div>
                                     <VodList
                                         dataSource={homeVodData.filter((mItem) => mItem.type_name === item)}
                                         onItemClick={(vod) => {
                                             router.push(`/detail?id=${encodeURIComponent(vod.vod_id as string)}&site=${current_site}`);
                                         }}
                                     ></VodList>
-                                </Fragment>
+                                </Flex>
                             );
                         })
                     ) : (

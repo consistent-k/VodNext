@@ -22,7 +22,7 @@ const SiteHeader = () => {
     const { sites } = useVodSitesStore();
 
     return (
-        <Header className={styles['vod-header']} style={{ backgroundColor: isDarkMode ? '#16161a' : '#fff' }} data-tauri-drag-region>
+        <Header className={styles['vod-header']} style={{ background: isDarkMode ? '#16161a' : 'linear-gradient(135deg, #f5f7fa 0%, #e3e8f0 100%)' }} data-tauri-drag-region>
             <Flex gap={8} align="center" justify="center">
                 <Flex
                     style={{ cursor: 'pointer', minWidth: 60, fontSize: 18 }}

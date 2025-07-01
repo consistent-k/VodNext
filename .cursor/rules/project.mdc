@@ -1,0 +1,14 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# 项目背景说明
+
+本项目为一个基于 Next.js 和 Tauri 的多端视频聚合播放器，支持 Web 和桌面端。
+
+- 前端采用 Next.js（React）实现，支持服务端渲染和静态生成。
+- 桌面端通过 Tauri 集成，支持跨平台（Windows、macOS、Linux）运行。
+- 项目聚合多个视频源，支持分类浏览、搜索、播放等功能。
+- 主要技术栈包括 TypeScript、SCSS、React、Tauri、Rust（桌面端部分）。
+- 适合需要聚合多站点视频内容并统一播放体验的场景。
