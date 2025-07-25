@@ -16,7 +16,7 @@
         "@ant-design/icons": "^5.6.1",
         "@ant-design/nextjs-registry": "^1.0.2",
         "@tailwindcss/postcss": "^4.1.11",
-        "@tauri-apps/plugin-http": "^2.5.0",
+        "@tauri-apps/plugin-http": "^2.5.1",
         "@tauri-apps/plugin-updater": "^2.9.0",
         "ahooks": "^3.9.0",
         "antd": "^5.26.3",
