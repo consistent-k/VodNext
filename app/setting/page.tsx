@@ -136,6 +136,7 @@ const SettingPage: React.FC = () => {
                                     force: true
                                 });
                             } catch (error) {
+                                console.error(error);
                                 message.error('验证接口失败');
                                 form.setFieldValue('current_site', '');
                             }

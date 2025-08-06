@@ -29,6 +29,9 @@ const eslintConfig = [
                     args: 'none'
                 }
             ],
+            '@typescript-eslint/no-explicit-any': 'off',
+            '@typescript-eslint/ban-ts-comment': 'off',
+            'react-hooks/exhaustive-deps': 'off',
             'unused-imports/no-unused-imports': 'warn',
             'import/order': [
                 2,

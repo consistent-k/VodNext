@@ -30,7 +30,7 @@ const VodPalyer: React.FC<PalyerProps> = (props) => {
         if (showType === 'iframe') {
             return;
         }
-        let player = new Player({
+        const player = new Player({
             id: 'xgplayer',
             url,
             height: '100%',
@@ -49,7 +49,7 @@ const VodPalyer: React.FC<PalyerProps> = (props) => {
             }
         });
         player.on('error', (e: any) => {
-            onError && onError(e.message);
+            onError?.(e.message);
         });
     }, [url, showType]);
 

@@ -93,26 +93,11 @@ const SearchContent: React.FC<SearchContentProps> = (props) => {
                 >
                     搜索
                 </Button>
-                <Button
-                    onClick={() => {
-                        onCancel && onCancel();
-                    }}
-                >
-                    取消
-                </Button>
+                <Button onClick={onCancel}>取消</Button>
             </Flex>
 
             <div style={{ height: 'calc(100% - 60px)', overflowY: 'auto', padding: '0 16px 16px 16px' }}>
-                {loading ? (
-                    <Spin tip="搜索中" fullscreen />
-                ) : (
-                    <VodList
-                        dataSource={dataSource}
-                        onItemClick={(vod) => {
-                            onItemClick && onItemClick(vod);
-                        }}
-                    ></VodList>
-                )}
+                {loading ? <Spin tip="搜索中" fullscreen /> : <VodList dataSource={dataSource} onItemClick={onItemClick}></VodList>}
             </div>
         </Flex>
     );
