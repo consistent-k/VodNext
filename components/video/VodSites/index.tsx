@@ -19,7 +19,7 @@ const VodSites: React.FC<VodSitesProps> = (props) => {
                     styles={{
                         popup: {
                             root: {
-                                minWidth: 100
+                                minWidth: 130
                             }
                         }
                     }}
@@ -27,9 +27,7 @@ const VodSites: React.FC<VodSitesProps> = (props) => {
                     defaultActiveFirstOption
                     variant="borderless"
                     value={value}
-                    onChange={(value) => {
-                        onChange && onChange(value);
-                    }}
+                    onChange={onChange}
                 />
             )}
         </div>
