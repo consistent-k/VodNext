@@ -51,7 +51,7 @@
         "@types/react": "19.1.8",
         "@types/react-dom": "19.1.6",
         "commitizen": "^4.3.1",
-        "cross-env": "^7.0.3",
+        "cross-env": "^10.0.0",
         "cz-conventional-changelog": "^3.3.0",
         "eslint": "^9.32.0",
         "eslint-config-next": "^15.4.5",
@@ -67,12 +67,19 @@
         "webpack": "^5.101.0"
     },
     "engines": {
-        "node": ">=22"
+        "node": ">=22",
+        "pnpm": ">=10.10.0"
     },
     "config": {
         "commitizen": {
             "path": "./node_modules/cz-conventional-changelog"
         }
     },
-    "packageManager": "pnpm@10.10.0"
+    "packageManager": "pnpm@10.10.0",
+    "pnpm": {
+        "onlyBuiltDependencies": [
+            "sharp",
+            "unrs-resolver"
+        ]
+    }
 }
