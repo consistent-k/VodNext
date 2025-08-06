@@ -39,7 +39,7 @@ const VodList: React.FC<VodListProps> = (props) => {
                                     width: 100
                                 }}
                                 onClick={() => {
-                                    onItemClick && onItemClick(vod);
+                                    onItemClick?.(vod);
                                 }}
                                 className={styles['vod-list-item']}
                             >
