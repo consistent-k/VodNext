@@ -44,7 +44,7 @@
         "@commitlint/cli": "^19.8.1",
         "@commitlint/config-conventional": "^19.8.1",
         "@eslint/eslintrc": "^3.3.1",
-        "@tauri-apps/cli": "^2.7.1",
+        "@tauri-apps/cli": "^2.8.3",
         "@types/crypto-js": "^4.2.2",
         "@types/lodash": "^4.17.20",
         "@types/node": "^24.2.0",
