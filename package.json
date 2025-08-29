@@ -49,7 +49,7 @@
         "@types/lodash": "^4.17.20",
         "@types/node": "^24.2.0",
         "@types/react": "19.1.8",
-        "@types/react-dom": "19.1.6",
+        "@types/react-dom": "19.1.9",
         "commitizen": "^4.3.1",
         "cross-env": "^10.0.0",
         "cz-conventional-changelog": "^3.3.0",
