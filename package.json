@@ -18,7 +18,7 @@
         "@tailwindcss/postcss": "^4.1.11",
         "@tauri-apps/plugin-http": "^2.5.1",
         "@tauri-apps/plugin-updater": "^2.9.0",
-        "ahooks": "^3.9.0",
+        "ahooks": "^3.9.5",
         "antd": "^5.26.7",
         "axios": "^1.11.0",
         "crypto-js": "^4.2.0",
