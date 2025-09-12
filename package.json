@@ -13,7 +13,7 @@
         "export": "cross-env BUILD_MODE=export BUILD_APP=1 next build"
     },
     "dependencies": {
-        "@ant-design/icons": "^5.6.1",
+        "@ant-design/icons": "^6.0.2",
         "@ant-design/nextjs-registry": "^1.1.0",
         "@tailwindcss/postcss": "^4.1.11",
         "@tauri-apps/plugin-http": "^2.5.1",
