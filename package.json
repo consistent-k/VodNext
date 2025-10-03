@@ -15,7 +15,7 @@
     "dependencies": {
         "@ant-design/icons": "^5.6.1",
         "@ant-design/nextjs-registry": "^1.1.0",
-        "@tailwindcss/postcss": "^4.1.11",
+        "@tailwindcss/postcss": "^4.1.14",
         "@tauri-apps/plugin-http": "^2.5.1",
         "@tauri-apps/plugin-updater": "^2.9.0",
         "ahooks": "^3.9.0",
