@@ -1,5 +1,4 @@
 import { NextConfig } from 'next';
-import webpack from 'webpack';
 
 const mode: NextConfig['output'] = process.env.BUILD_MODE as NextConfig['output'] ?? 'standalone';
 console.log('[Next] build mode', mode);
@@ -8,23 +7,9 @@ const disableChunk = !!process.env.DISABLE_CHUNK || mode === 'export';
 console.log('[Next] build with chunk: ', !disableChunk);
 
 const nextConfig: NextConfig = {
-    webpack(config) {
-        if (disableChunk) {
-            config.plugins.push(new webpack.optimize.LimitChunkCountPlugin({ maxChunks: 1 }));
-        }
-
-        config.resolve.fallback = {
-            child_process: false
-        };
-
-        return config;
-    },
     output: mode,
     images: {
         unoptimized: mode === 'export'
-    },
-    experimental: {
-        forceSwcTransforms: true
     },
     reactStrictMode: false,
     sassOptions: {
