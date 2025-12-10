@@ -41,7 +41,7 @@
     },
     "devDependencies": {
         "@ant-design/v5-patch-for-react-19": "^1.0.3",
-        "@commitlint/cli": "^19.8.1",
+        "@commitlint/cli": "^20.2.0",
         "@commitlint/config-conventional": "^19.8.1",
         "@eslint/eslintrc": "^3.3.3",
         "@tauri-apps/cli": "^2.9.6",
