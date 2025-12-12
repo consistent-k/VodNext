@@ -31,7 +31,7 @@
         "react-dom": "^19.2.1",
         "sass": "^1.95.1",
         "store2": "^2.14.4",
-        "tailwindcss": "^4.1.17",
+        "tailwindcss": "^4.1.18",
         "valtio": "^2.2.0",
         "xgplayer": "3.0.23",
         "xgplayer-flv": "^3.0.23",
