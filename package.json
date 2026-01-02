@@ -42,7 +42,7 @@
     "devDependencies": {
         "@ant-design/v5-patch-for-react-19": "^1.0.3",
         "@commitlint/cli": "^20.2.0",
-        "@commitlint/config-conventional": "^20.2.0",
+        "@commitlint/config-conventional": "^20.3.0",
         "@eslint/eslintrc": "^3.3.3",
         "@tauri-apps/cli": "^2.9.6",
         "@types/crypto-js": "^4.2.2",
