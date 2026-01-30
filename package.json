@@ -20,7 +20,7 @@
         "@tauri-apps/plugin-updater": "^2.9.0",
         "ahooks": "^3.9.6",
         "antd": "^6.1.0",
-        "axios": "^1.13.2",
+        "axios": "^1.13.4",
         "crypto-js": "^4.2.0",
         "dayjs": "^1.11.19",
         "hls.js": "^1.6.15",
