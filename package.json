@@ -37,7 +37,7 @@
         "xgplayer-flv": "^3.0.23",
         "xgplayer-hls": "^3.0.23",
         "xgplayer-mp4": "^3.0.23",
-        "zustand": "^5.0.9"
+        "zustand": "^5.0.11"
     },
     "devDependencies": {
         "@ant-design/v5-patch-for-react-19": "^1.0.3",
