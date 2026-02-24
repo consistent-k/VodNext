@@ -208,7 +208,7 @@ const VodSearch: React.FC<VodSearchProps> = (props) => {
                     mask
                     width={800}
                     styles={{
-                        content: {
+                        body: {
                             padding: 10
                         }
                     }}
