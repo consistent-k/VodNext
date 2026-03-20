@@ -1,10 +1,10 @@
 'use client';
-import { Flex, Spin } from 'antd';
 import { uniq } from 'lodash';
 import { useRouter } from 'next/navigation';
 import React, { Fragment, useCallback, useEffect, useState } from 'react';
 
 import styles from './index.module.scss';
+import { Loading } from '@/components/ui/Loading';
 import VodList from '@/components/video/VodList';
 import useSettingStore from '@/lib/store/useSettingStore';
 import { HomeVodData } from '@/lib/types';
@@ -40,27 +40,48 @@ const HomePage: React.FC = () => {
     return (
         <div className={styles['vod-next-home']}>
             {loading ? (
-                <Spin tip="加载中" fullscreen />
+                <Loading fullscreen description="加载中" />
             ) : (
                 <>
                     {homeVodTypes?.length > 0 ? (
                         homeVodTypes.map((item, index) => {
                             return (
-                                <Flex key={`${item}-${index.toString()}`} vertical gap={16}>
-                                    <div className={styles['vod-next-home-title']}>{item}</div>
+                                <div key={`${item}-${index.toString()}`} className={styles['vod-next-home-section']}>
+                                    <div className={styles['vod-next-home-header']}>
+                                        <div className={styles['vod-next-home-title']}>{item}</div>
+                                        <div
+                                            className={styles['vod-next-home-more']}
+                                            onClick={() => {
+                                                const typeData = homeVodData.find((mItem) => mItem.type_name === item);
+                                                if (typeData) {
+                                                    router.push(`/category?id=${typeData.type_id}&name=${item}&site=${current_site}`);
+                                                }
+                                            }}
+                                        >
+                                            更多
+                                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M9 18L15 12L9 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                                            </svg>
+                                        </div>
+                                    </div>
                                     <VodList
                                         dataSource={homeVodData.filter((mItem) => mItem.type_name === item)}
                                         onItemClick={(vod) => {
                                             router.push(`/detail?id=${encodeURIComponent(vod.vod_id as string)}&site=${current_site}`);
                                         }}
                                     ></VodList>
-                                </Flex>
+                                </div>
                             );
                         })
                     ) : (
-                        <Flex vertical justify="center" align="center">
+                        <div className={styles['vod-next-home-empty']}>
+                            <svg width="64" height="64" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M4 4H20V16H4V4Z" stroke="#64748B" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                                <path d="M8 20H16" stroke="#64748B" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                                <path d="M12 16V20" stroke="#64748B" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                            </svg>
                             <span>暂无数据</span>
-                        </Flex>
+                        </div>
                     )}
                 </>
             )}

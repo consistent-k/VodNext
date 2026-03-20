@@ -4,14 +4,12 @@ import { persist } from 'zustand/middleware';
 
 interface ThemeStore {
     isDarkMode: boolean;
-    toggleTheme: () => void;
 }
 
 export const useThemeStore = create<ThemeStore>()(
     persist(
-        (set) => ({
-            isDarkMode: false,
-            toggleTheme: () => set((state) => ({ isDarkMode: !state.isDarkMode }))
+        () => ({
+            isDarkMode: true as boolean
         }),
         {
             name: 'vod_next_theme_storage',

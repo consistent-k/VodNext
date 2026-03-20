@@ -1,0 +1,14 @@
+{
+    "$schema": "https://opencode.ai/config.json",
+    "mcp": {
+        "antd-components": {
+            "type": "local",
+            "command": [
+                "npx",
+                "-y",
+                "@jzone-mcp/antd-components-mcp"
+            ],
+            "enabled": true
+        }
+    }
+}

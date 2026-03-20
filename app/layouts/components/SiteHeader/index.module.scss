@@ -1,6 +1,47 @@
 .vod-header {
-    padding: 0 16px !important;
+    padding: 0 24px !important;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    height: 64px;
+    background: rgba(15, 15, 35, 0.8);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--color-border-secondary);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+
+    &-logo {
+        cursor: pointer;
+        transition: opacity 0.2s;
+
+        &:hover {
+            opacity: 0.8;
+        }
+    }
+
+    &-title {
+        font-size: 20px;
+        font-weight: 700;
+        background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-light) 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+
+    &-btn {
+        font-size: 16px;
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 10px;
+        transition: all 0.2s;
+
+        &:hover {
+            background: rgba(225, 29, 72, 0.1) !important;
+            color: var(--color-primary) !important;
+        }
+    }
 }

@@ -3,41 +3,101 @@
 import { App, ConfigProvider, theme } from 'antd';
 import zhCN from 'antd/lib/locale/zh_CN';
 
-import { useThemeStore } from '@/lib/store/useThemeStore';
-
 export default function ThemeProvider({ children }: { children: React.ReactNode }) {
-    const { isDarkMode } = useThemeStore();
-
     return (
         <ConfigProvider
             theme={{
-                algorithm: isDarkMode ? theme.darkAlgorithm : theme.defaultAlgorithm,
+                algorithm: theme.darkAlgorithm,
                 token: {
-                    colorPrimary: '#6366f1',
-                    borderRadius: 10,
-                    fontFamily: 'Inter, Roboto, "Helvetica Neue", Arial, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif'
+                    // 品牌色
+                    colorPrimary: '#E11D48',
+                    // 背景色
+                    colorBgContainer: '#0F0F23',
+                    colorBgElevated: '#1E1B4B',
+                    colorBgLayout: '#000000',
+                    // 文字色
+                    colorText: '#F8FAFC',
+                    colorTextSecondary: '#94A3B8',
+                    colorTextTertiary: '#64748B',
+                    // 边框色
+                    colorBorder: '#334155',
+                    colorBorderSecondary: 'rgba(51, 65, 85, 0.5)',
+                    // 圆角
+                    borderRadius: 12,
+                    // 字体
+                    fontFamily: '"Righteous", "Poppins", Inter, Roboto, "Helvetica Neue", Arial, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif'
                 },
                 components: {
                     Button: {
-                        colorPrimary: '#6366f1',
+                        colorPrimary: '#E11D48',
                         borderRadius: 8,
-                        fontWeight: 500
+                        fontWeight: 600,
+                        primaryColor: '#F8FAFC'
                     },
                     Card: {
-                        borderRadius: 16,
-                        boxShadow: '0 4px 24px rgba(0,0,0,0.08)'
+                        borderRadiusLG: 16
                     },
                     Input: {
-                        hoverBorderColor: '#6366f1',
-                        activeBorderColor: '#6366f1'
+                        hoverBorderColor: '#E11D48',
+                        activeBorderColor: '#E11D48',
+                        colorBgContainer: '#0F0F23',
+                        colorBorder: '#334155',
+                        colorText: '#F8FAFC',
+                        colorTextPlaceholder: '#64748B',
+                        activeShadow: '0 0 0 2px rgba(225, 29, 72, 0.2)'
                     },
                     Layout: {
-                        bodyBg: isDarkMode ? '#1a1c1f' : 'linear-gradient(135deg, #f5f7fa 0%, #e3e8f0 100%)',
-                        footerBg: isDarkMode ? '#1a1c1f' : 'linear-gradient(135deg, #f5f7fa 0%, #e3e8f0 100%)'
+                        bodyBg: '#000000',
+                        headerBg: '#0F0F23',
+                        footerBg: '#000000',
+                        siderBg: '#0F0F23'
                     },
                     Collapse: {
                         headerPadding: 0,
                         contentPadding: 0
+                    },
+                    Tag: {
+                        colorBgContainer: '#1E1B4B',
+                        colorText: '#94A3B8'
+                    },
+                    Select: {
+                        colorBgContainer: '#0F0F23',
+                        colorBorder: '#334155',
+                        colorText: '#F8FAFC',
+                        colorTextPlaceholder: '#64748B',
+                        optionSelectedBg: 'rgba(225, 29, 72, 0.1)',
+                        optionSelectedColor: '#E11D48',
+                        optionActiveBg: 'rgba(30, 27, 75, 0.8)',
+                        selectorBg: '#0F0F23'
+                    },
+                    Tabs: {
+                        itemColor: '#64748B',
+                        itemSelectedColor: '#E11D48',
+                        itemHoverColor: '#F8FAFC',
+                        inkBarColor: '#E11D48',
+                        itemActiveColor: '#E11D48'
+                    },
+                    Steps: {
+                        colorPrimary: '#E11D48',
+                        colorText: '#F8FAFC',
+                        colorTextDescription: '#64748B',
+                        colorIcon: '#64748B',
+                        colorPrimaryBorder: '#E11D48'
+                    },
+                    Descriptions: {
+                        colorText: '#F8FAFC',
+                        colorTextSecondary: '#94A3B8',
+                        colorTextTertiary: '#64748B',
+                        labelColor: '#64748B',
+                        contentColor: '#94A3B8'
+                    },
+                    Typography: {
+                        colorText: '#94A3B8',
+                        colorTextSecondary: '#64748B'
+                    },
+                    Form: {
+                        labelColor: '#94A3B8',
+                        labelRequiredMarkColor: '#E11D48'
                     }
                 }
             }}

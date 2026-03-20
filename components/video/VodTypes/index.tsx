@@ -1,8 +1,7 @@
-import { Tabs } from 'antd';
-import type { TabsProps } from 'antd';
-import { includes } from 'lodash';
-import { usePathname, useRouter, useSearchParams } from 'next/navigation';
-import { useEffect, useState } from 'react';
+'use client';
+
+import { useRouter, usePathname, useSearchParams } from 'next/navigation';
+import { useEffect, useState, useRef, useMemo } from 'react';
 import store from 'store2';
 
 import styles from './index.module.scss';
@@ -12,26 +11,29 @@ interface VodTypesProps {
     site: string;
 }
 
-const VodTypes: React.FC<VodTypesProps> = (props) => {
-    const { site } = props;
-    const [items, setItems] = useState<TabsProps['items']>([]);
-    const [activeKey, setActiveKey] = useState(''); // 当前激活的分类
+interface TabItem {
+    key: string;
+    label: string;
+}
+
+const VodTypes: React.FC<VodTypesProps> = ({ site }) => {
+    const [items, setItems] = useState<TabItem[]>([]);
+    const [canScrollLeft, setCanScrollLeft] = useState(false);
+    const [canScrollRight, setCanScrollRight] = useState(false);
+    const scrollContainerRef = useRef<HTMLDivElement>(null);
 
     const router = useRouter();
-
     const pathname = usePathname();
-
     const searchParams = useSearchParams();
 
-    useEffect(() => {
-        if (includes(pathname, 'category')) {
-            const id = searchParams.get('id') || '';
-            setActiveKey(id as string);
+    const activeKey = useMemo(() => {
+        if (pathname.includes('category')) {
+            return searchParams.get('id') || '';
         }
-
-        if (includes(pathname, 'home')) {
-            setActiveKey('all');
+        if (pathname.includes('home')) {
+            return 'all';
         }
+        return '';
     }, [pathname, searchParams]);
 
     const getHome = async (site: string) => {
@@ -40,16 +42,11 @@ const VodTypes: React.FC<VodTypesProps> = (props) => {
             const { code, data } = res;
             if (code === 0) {
                 store.set('vod_next_home_data', data);
-                const newItems = data.map((item) => {
-                    return {
-                        key: String(item.type_id),
-                        label: item.type_name
-                    };
-                });
-                newItems.unshift({
-                    key: 'all',
-                    label: '最近更新'
-                } as any);
+                const newItems = data.map((item) => ({
+                    key: String(item.type_id),
+                    label: item.type_name
+                }));
+                newItems.unshift({ key: 'all', label: '最近更新' });
                 setItems(newItems);
             }
         } catch (error) {
@@ -59,23 +56,86 @@ const VodTypes: React.FC<VodTypesProps> = (props) => {
 
     useEffect(() => {
         store.set('vod_next_home_data', []);
+        // eslint-disable-next-line react-hooks/set-state-in-effect
         getHome(site);
     }, [site]);
 
+    const updateScrollButtons = () => {
+        const container = scrollContainerRef.current;
+        if (container) {
+            setCanScrollLeft(container.scrollLeft > 0);
+            setCanScrollRight(container.scrollLeft < container.scrollWidth - container.clientWidth - 1);
+        }
+    };
+
+    useEffect(() => {
+        updateScrollButtons();
+        const container = scrollContainerRef.current;
+        if (container) {
+            container.addEventListener('scroll', updateScrollButtons);
+            window.addEventListener('resize', updateScrollButtons);
+            return () => {
+                container.removeEventListener('scroll', updateScrollButtons);
+                window.removeEventListener('resize', updateScrollButtons);
+            };
+        }
+    }, [items]);
+
+    const scroll = (direction: 'left' | 'right') => {
+        const container = scrollContainerRef.current;
+        if (container) {
+            const scrollAmount = 200;
+            container.scrollBy({
+                left: direction === 'left' ? -scrollAmount : scrollAmount,
+                behavior: 'smooth'
+            });
+        }
+    };
+
+    const handleTabClick = (key: string) => {
+        if (key === 'all') {
+            router.push('/home');
+        } else {
+            router.push(`/category?id=${key}&name=${name}&site=${site}`);
+        }
+    };
+
     return (
         <div className={styles['vod-types']}>
-            <Tabs
-                items={items}
-                activeKey={activeKey}
-                onChange={(key) => {
-                    setActiveKey(key);
-                    if (key === 'all') {
-                        router.push('/home');
-                    } else {
-                        router.push(`/category?id=${key}&name=${name}&site=${site}`);
-                    }
-                }}
-            />
+            <div className={styles['tabs-wrapper']}>
+                {canScrollLeft && (
+                    <button onClick={() => scroll('left')} className={styles['scroll-button']} aria-label="向左滚动">
+                        <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                        </svg>
+                    </button>
+                )}
+
+                <div ref={scrollContainerRef} className={styles['tabs-container']}>
+                    <div className={styles['tabs-list']}>
+                        {items.map((item) => (
+                            <button
+                                key={item.key}
+                                onClick={() => handleTabClick(item.key)}
+                                className={`${styles['tab-item']} ${activeKey === item.key ? styles['active'] : ''}`}
+                                aria-selected={activeKey === item.key}
+                                role="tab"
+                            >
+                                <span className={styles['tab-label']}>{item.label}</span>
+                                {activeKey === item.key && <div className={styles['active-indicator']} />}
+                            </button>
+                        ))}
+                    </div>
+                </div>
+
+                {canScrollRight && (
+                    <button onClick={() => scroll('right')} className={styles['scroll-button']} aria-label="向右滚动">
+                        <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                        </svg>
+                    </button>
+                )}
+            </div>
         </div>
     );
 };

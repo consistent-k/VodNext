@@ -1,3 +1,18 @@
+@import url('https://fonts.googleapis.com/css2?family=Righteous&family=Poppins:wght@300;400;500;600;700&display=swap');
+
+:root {
+    --color-primary: #e11d48;
+    --color-primary-light: #fb7185;
+    --color-bg: #000000;
+    --color-bg-container: #0f0f23;
+    --color-bg-elevated: #1e1b4b;
+    --color-text: #f8fafc;
+    --color-text-secondary: #94a3b8;
+    --color-text-tertiary: #64748b;
+    --color-border: #334155;
+    --color-border-secondary: rgba(51, 65, 85, 0.5);
+}
+
 body,
 html,
 #root {
@@ -5,22 +20,28 @@ html,
     padding: 0;
     width: 100%;
     height: 100%;
-    color: #222;
-    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-    font-family: 'Inter', 'Roboto', 'Helvetica Neue', Arial, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+    color: var(--color-text);
+    background: var(--color-bg);
+    font-family: 'Righteous', 'Poppins', 'Inter', 'Roboto', 'Helvetica Neue', Arial, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
     letter-spacing: 0.02em;
     font-size: 16px;
-    transition: background 0.3s, color 0.3s;
+    transition:
+        background 0.3s,
+        color 0.3s;
 }
 
 * {
     box-sizing: border-box;
-    transition: background 0.3s, color 0.3s, box-shadow 0.3s, border-color 0.3s;
+    transition:
+        background 0.3s,
+        color 0.3s,
+        box-shadow 0.3s,
+        border-color 0.3s;
 }
 
 html {
     scrollbar-width: thin;
-    scrollbar-color: #eaeaea transparent;
+    scrollbar-color: var(--color-border) transparent;
 
     ::-webkit-scrollbar {
         width: 8px;
@@ -33,11 +54,16 @@ html {
 
     ::-webkit-scrollbar-thumb {
         border-radius: 8px;
-        background-color: #d1d5db;
+        background-color: var(--color-border);
     }
 
     ::-webkit-scrollbar-thumb:hover {
         cursor: pointer;
-        background-color: #b0b4ba;
+        background-color: var(--color-text-tertiary);
     }
+}
+
+::selection {
+    background: var(--color-primary);
+    color: var(--color-text);
 }

@@ -1,14 +1,81 @@
 ---
-description: 
+description: 项目目录结构说明
 globs: 
-alwaysApply: false
+alwaysApply: true
 ---
 # 项目结构说明
 
-- 前端主入口为 [app/layout.tsx](mdc:app/layout.tsx)，页面路由位于 [app/](mdc:app) 目录下。
-- 公共组件存放在 [components/](mdc:components) 目录。
-- 样式文件主要在各自模块的 `index.module.scss` 文件中。
-- 全局类型定义在 [app/global.d.ts](mdc:app/global.d.ts) 和 [lib/types/](mdc:lib/types) 下。
-- 业务逻辑和工具函数在 [lib/](mdc:lib) 目录。
-- 服务端接口相关代码在 [services/](mdc:services) 目录。
-- Tauri 桌面端相关代码在 [src-tauri/](mdc:src-tauri) 目录。
+## 目录结构
+
+```
+app/                    # Next.js App Router 页面
+├── layout.tsx          # 根布局
+├── layouts/            # 布局组件
+├── home/               # 首页
+├── category/           # 分类浏览
+├── detail/             # 视频详情
+├── setting/            # 设置页面
+└── globals.scss        # 全局样式
+
+components/             # 公共组件
+├── providers/          # 上下文提供者
+│   ├── InitProvider.tsx   # 初始化提供者
+│   └── ThemeProvider.tsx  # 主题提供者
+├── video/              # 视频相关组件
+│   ├── VodList/           # 视频列表
+│   ├── VodPalyer/         # 视频播放器
+│   ├── VodSearch/         # 搜索组件
+│   ├── VodSites/          # 站点选择
+│   └── VodTypes/          # 分类选择
+└── icons/              # 图标组件
+
+lib/                    # 业务逻辑和工具
+├── constant/           # 常量定义
+├── hooks/              # 自定义 Hooks
+├── store/              # Zustand 状态管理
+├── types/              # TypeScript 类型定义
+└── utils/              # 工具函数
+    └── request/        # HTTP 请求封装
+
+services/               # API 服务层
+├── index.ts            # 服务导出
+└── vodhub/             # VodHub API
+
+src-tauri/              # Tauri 桌面端
+├── src/                # Rust 源码
+├── capabilities/       # 权限配置
+└── tauri.conf.json     # Tauri 配置
+```
+
+## 文件组织规范
+
+### 页面组件
+- 位于 `app/` 目录，使用 Next.js App Router
+- 每个页面目录包含 `page.tsx` 和可选的 `index.module.scss`
+- 使用 `'use client'` 指令标记客户端组件
+
+### 公共组件
+- 位于 `components/` 目录
+- 组件目录格式：`ComponentName/index.tsx` + `index.module.scss`
+- 导出接口使用 `export interface` 定义
+
+### 状态管理
+- 位于 `lib/store/` 目录
+- 文件命名：`use{Name}Store.ts`
+- 使用 Zustand + persist 中间件
+
+### API 服务
+- 位于 `services/` 目录
+- 按功能模块组织（如 `vodhub/`）
+- 使用泛型定义响应类型
+
+### 样式文件
+- 使用 SCSS Modules（`.module.scss`）
+- 类名使用 `vod-next-` 前缀
+- 支持亮色/暗色主题
+
+## 关键文件位置
+- 类型定义：[lib/types/index.ts](mdc:lib/types/index.ts)
+- HTTP 请求封装：[lib/utils/request/index.ts](mdc:lib/utils/request/index.ts)
+- 主题配置：[components/providers/ThemeProvider.tsx](mdc:components/providers/ThemeProvider.tsx)
+- 站点状态：[lib/store/useVodSitesStore.ts](mdc:lib/store/useVodSitesStore.ts)

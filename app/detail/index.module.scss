@@ -1,23 +1,79 @@
 .vod-next-detail {
     height: 100%;
     width: 100%;
-    padding: 20px;
+
+    &-player {
+        background: var(--color-bg-container);
+        border-radius: 16px;
+        overflow: hidden;
+        border: 1px solid var(--color-border);
+    }
+
     &-playlist {
+        background: rgba(15, 15, 35, 0.6);
+        border-radius: 16px;
+        border: 1px solid var(--color-border);
+        padding: 20px;
+    }
+
+    &-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
         margin-bottom: 16px;
     }
-    &-info {
-        position: relative;
-        margin-top: 10px;
-        &-poster {
-            position: relative;
-            z-index: 10;
-            border-radius: 8px;
-            img {
-                width: 100%;
-                height: 100%;
-                border-radius: 8px;
-                object-fit: cover;
-            }
+
+    &-title {
+        font-size: 18px;
+        font-weight: 600;
+        color: var(--color-text);
+    }
+
+    &-source {
+        font-size: 13px;
+        color: var(--color-text-tertiary);
+    }
+
+    &-episodes {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        max-height: 300px;
+        overflow-y: auto;
+    }
+
+    &-episode {
+        flex: 0 0 calc(33.33% - 6px);
+        padding: 10px 12px;
+        background: rgba(30, 27, 75, 0.5);
+        border-radius: 8px;
+        font-size: 13px;
+        color: var(--color-text-secondary);
+        cursor: pointer;
+        transition: all 0.2s;
+        text-align: center;
+        border: 1px solid transparent;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+
+        &:hover {
+            color: var(--color-text);
+            background: rgba(30, 27, 75, 0.8);
         }
+
+        &.active {
+            color: var(--color-primary);
+            background: rgba(225, 29, 72, 0.1);
+            border-color: rgba(225, 29, 72, 0.3);
+        }
+    }
+
+    &-info {
+        background: rgba(15, 15, 35, 0.6);
+        border-radius: 16px;
+        border: 1px solid var(--color-border);
+        padding: 20px;
+        margin-top: 24px;
     }
 }
