@@ -33,7 +33,7 @@
         "store2": "^2.14.4",
         "tailwindcss": "^4.2.2",
         "valtio": "^2.3.1",
-        "xgplayer": "3.0.23",
+        "xgplayer": "^3.0.24",
         "xgplayer-flv": "^3.0.24",
         "xgplayer-hls": "^3.0.24",
         "xgplayer-mp4": "^3.0.24",

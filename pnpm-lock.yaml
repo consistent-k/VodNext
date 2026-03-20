@@ -69,17 +69,17 @@ importers:
         specifier: ^2.3.1
         version: 2.3.1(@types/react@19.2.14)(react@19.2.4)
       xgplayer:
-        specifier: 3.0.23
-        version: 3.0.23(core-js@3.39.0)
+        specifier: ^3.0.24
+        version: 3.0.24(core-js@3.39.0)
       xgplayer-flv:
         specifier: ^3.0.24
-        version: 3.0.24(core-js@3.39.0)(xgplayer@3.0.23(core-js@3.39.0))
+        version: 3.0.24(core-js@3.39.0)(xgplayer@3.0.24(core-js@3.39.0))
       xgplayer-hls:
         specifier: ^3.0.24
-        version: 3.0.24(core-js@3.39.0)(xgplayer@3.0.23(core-js@3.39.0))
+        version: 3.0.24(core-js@3.39.0)(xgplayer@3.0.24(core-js@3.39.0))
       xgplayer-mp4:
         specifier: ^3.0.24
-        version: 3.0.24(core-js@3.39.0)(xgplayer@3.0.23(core-js@3.39.0))
+        version: 3.0.24(core-js@3.39.0)(xgplayer@3.0.24(core-js@3.39.0))
       zustand:
         specifier: ^5.0.12
         version: 5.0.12(@types/react@19.2.14)(react@19.2.4)
@@ -1883,9 +1883,6 @@ packages:
     resolution: {integrity: sha512-QM8q3zDe58hqUqjraQOmzZ1LIH9SWQJTlEKCH4kJ2oQvLZk7RbQXvtDM2XEq3fwkV9CCvvH4LA0AV+ogFsBM2Q==}
     engines: {node: '>=8'}
 
-  downloadjs@1.4.7:
-    resolution: {integrity: sha512-LN1gO7+u9xjU5oEScGFKvXhYf7Y/empUIIEAGBs1LzUq/rg5duiDrkuH5A2lQGd5jfMOb9X9usDa2oVXwJ0U/Q==}
-
   dunder-proto@1.0.1:
     resolution: {integrity: sha512-KIN/nDJBQRcXw0MLVhZE9iQHmG68qAVIBg9CqmUYjmQIhgij9U5MFvrqkUL5FbtyyzZuOeOt0zdeRe4UY7ct+A==}
     engines: {node: '>= 0.4'}
@@ -3538,8 +3535,8 @@ packages:
     peerDependencies:
       core-js: '>=3.12.1'
 
-  xgplayer-subtitles@3.0.23:
-    resolution: {integrity: sha512-deGdV75giVzfTTdG9XATmji39NHwKTpEelWt2rRx/RyXGgU2bQFp0Ft7yWaK2Uu8A/WVrP5fpxEAj4MstREMkQ==}
+  xgplayer-subtitles@3.0.24:
+    resolution: {integrity: sha512-yrHROepD9kTGWiTSxBjh+TGaK9orQOHQ1GUxWFOkQzO8BLl/pcIAqqJkHiAoP0j+eU8VdIhpb55oJRIkTTWPsA==}
     peerDependencies:
       core-js: '>=3.12.1'
 
@@ -3548,8 +3545,8 @@ packages:
     peerDependencies:
       core-js: '>=3.12.1'
 
-  xgplayer@3.0.23:
-    resolution: {integrity: sha512-Bn3zQfMMAZimlVG9EeIDybMcklc+6FH8Sv47KpTq4K6ofCzyhPG/KenxailDedlHmxjb5B2o+240TpJtMQ3oJA==}
+  xgplayer@3.0.24:
+    resolution: {integrity: sha512-rK3hoJ+1Pbl9PUCHgeJv1GnOQF28BKLQFTBxdvi0pHsibJeXaDUf51SLFcgNVAPN15aDYcjJgaSf7LQ0RfEFPQ==}
     peerDependencies:
       core-js: '>=3.12.1'
 
@@ -5387,8 +5384,6 @@ snapshots:
   dot-prop@5.3.0:
     dependencies:
       is-obj: 2.0.0
-
-  downloadjs@1.4.7: {}
 
   dunder-proto@1.0.1:
     dependencies:
@@ -7239,19 +7234,19 @@ snapshots:
 
   wrappy@1.0.2: {}
 
-  xgplayer-flv@3.0.24(core-js@3.39.0)(xgplayer@3.0.23(core-js@3.39.0)):
+  xgplayer-flv@3.0.24(core-js@3.39.0)(xgplayer@3.0.24(core-js@3.39.0)):
     dependencies:
       core-js: 3.39.0
       eventemitter3: 4.0.7
-      xgplayer: 3.0.23(core-js@3.39.0)
+      xgplayer: 3.0.24(core-js@3.39.0)
       xgplayer-streaming-shared: 3.0.24(core-js@3.39.0)
       xgplayer-transmuxer: 3.0.24(core-js@3.39.0)
 
-  xgplayer-hls@3.0.24(core-js@3.39.0)(xgplayer@3.0.23(core-js@3.39.0)):
+  xgplayer-hls@3.0.24(core-js@3.39.0)(xgplayer@3.0.24(core-js@3.39.0)):
     dependencies:
       core-js: 3.39.0
       eventemitter3: 4.0.7
-      xgplayer: 3.0.23(core-js@3.39.0)
+      xgplayer: 3.0.24(core-js@3.39.0)
       xgplayer-streaming-shared: 3.0.24(core-js@3.39.0)
       xgplayer-transmuxer: 3.0.24(core-js@3.39.0)
 
@@ -7262,13 +7257,13 @@ snapshots:
       xgplayer-streaming-shared: 3.0.24(core-js@3.39.0)
       xgplayer-transmuxer: 3.0.24(core-js@3.39.0)
 
-  xgplayer-mp4@3.0.24(core-js@3.39.0)(xgplayer@3.0.23(core-js@3.39.0)):
+  xgplayer-mp4@3.0.24(core-js@3.39.0)(xgplayer@3.0.24(core-js@3.39.0)):
     dependencies:
       concat-typed-array: 1.0.2
       core-js: 3.39.0
       deepmerge: 2.2.1
       eventemitter3: 4.0.7
-      xgplayer: 3.0.23(core-js@3.39.0)
+      xgplayer: 3.0.24(core-js@3.39.0)
       xgplayer-mp4-loader: 3.0.24(core-js@3.39.0)
       xgplayer-streaming-shared: 3.0.24(core-js@3.39.0)
       xgplayer-transmuxer: 3.0.24(core-js@3.39.0)
@@ -7278,7 +7273,7 @@ snapshots:
       core-js: 3.39.0
       eventemitter3: 4.0.7
 
-  xgplayer-subtitles@3.0.23(core-js@3.39.0):
+  xgplayer-subtitles@3.0.24(core-js@3.39.0):
     dependencies:
       core-js: 3.39.0
       eventemitter3: 4.0.7
@@ -7290,14 +7285,13 @@ snapshots:
       core-js: 3.39.0
       crypto-es: 1.2.7
 
-  xgplayer@3.0.23(core-js@3.39.0):
+  xgplayer@3.0.24(core-js@3.39.0):
     dependencies:
       core-js: 3.39.0
       danmu.js: 1.2.1
       delegate: 3.2.0
-      downloadjs: 1.4.7
       eventemitter3: 4.0.7
-      xgplayer-subtitles: 3.0.23(core-js@3.39.0)
+      xgplayer-subtitles: 3.0.24(core-js@3.39.0)
 
   y18n@5.0.8: {}
 
