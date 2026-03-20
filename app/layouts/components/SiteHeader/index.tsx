@@ -21,21 +21,20 @@ const SiteHeader = () => {
 
     return (
         <Header className={styles['vod-header']} data-tauri-drag-region>
-            <Flex gap={16} align="center">
+            <Flex gap={20} align="center">
                 <Flex
                     className={styles['vod-header-logo']}
                     onClick={() => {
                         router.push('/home');
                     }}
                     align="center"
-                    gap={8}
+                    gap={10}
                 >
-                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M4 4H20V16H4V4Z" stroke="#E11D48" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                        <path d="M8 20H16" stroke="#E11D48" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                        <path d="M12 16V20" stroke="#E11D48" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                        <path d="M9 8L15 12L9 16V8Z" fill="#E11D48" />
-                    </svg>
+                    <div className={styles['vod-header-logo-icon']}>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M9 8L15 12L9 16V8Z" fill="currentColor" />
+                        </svg>
+                    </div>
                     <span className={styles['vod-header-title']}>{site_name || 'VodNext'}</span>
                 </Flex>
                 <VodSites
@@ -47,7 +46,7 @@ const SiteHeader = () => {
                     }}
                 />
             </Flex>
-            <Flex gap={12} align="center">
+            <Flex gap={8} align="center">
                 <VodSearch site={current_site} />
                 <Button
                     type="text"
