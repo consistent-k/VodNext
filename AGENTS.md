@@ -9,7 +9,7 @@ VodNext is a multi-platform video aggregator player built with Next.js (React) a
 - **Framework**: Next.js 16 + React 19
 - **Language**: TypeScript (strict mode)
 - **State**: Zustand (with persist middleware)
-- **UI**: Ant Design 6 + Tailwind CSS 4 + SCSS modules
+- **UI**: Ant Design 6 + SCSS modules + CSS 变量（支持多主题）
 - **Desktop**: Tauri 2 (Rust backend in `src-tauri/`)
 - **HTTP**: Axios (web) / Tauri plugin-http (desktop)
 - **Package Manager**: pnpm 10.10.0
@@ -109,8 +109,21 @@ import { useVodSitesStore } from '@/lib/store/useVodSitesStore';
 ### Styling
 
 - SCSS modules preferred (`*.module.scss`)
-- Tailwind utility classes for layout
+- All colors must use CSS variables (`var(--color-*)`)
+- Supports multiple themes: midnight, aurora, cyber
+- Theme config in `lib/themes/index.ts`
 - Ant Design components for UI elements
+
+### CSS Variables Reference
+
+| Category   | Variables                                                                                                                                           |
+| ---------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Brand      | `--color-primary`, `--color-primary-light`                                                                                                          |
+| Background | `--color-bg`, `--color-bg-container`, `--color-bg-elevated`, `--color-bg-container-alpha`, `--color-bg-elevated-alpha`, `--color-bg-elevated-hover` |
+| Text       | `--color-text`, `--color-text-secondary`, `--color-text-tertiary`                                                                                   |
+| Border     | `--color-border`, `--color-border-secondary`                                                                                                        |
+| State      | `--color-primary-alpha-low`, `--color-primary-alpha-medium`, `--color-primary-alpha-hover`, `--color-primary-shadow`                                |
+| Overlay    | `--color-overlay`, `--color-overlay-border`                                                                                                         |
 
 ## Project Structure
 
@@ -125,9 +138,11 @@ app/              # Next.js App Router pages
 components/       # Shared UI components
   providers/      # Context providers
   video/          # Video player components
+  ui/             # UI components (ThemeSelector etc.)
 lib/              # Business logic & utilities
   hooks/          # Custom React hooks
   store/          # Zustand stores
+  themes/         # Theme configurations
   types/          # TypeScript interfaces
   utils/          # Utility functions & request client
 services/         # API service layer

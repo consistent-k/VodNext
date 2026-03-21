@@ -105,7 +105,7 @@ const VodTypes: React.FC<VodTypesProps> = ({ site }) => {
             <div className={styles['tabs-wrapper']}>
                 {canScrollLeft && (
                     <button onClick={() => scroll('left')} className={styles['scroll-button']} aria-label="向左滚动">
-                        <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <svg style={{ width: 16, height: 16 }} fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
                         </svg>
                     </button>
@@ -130,7 +130,7 @@ const VodTypes: React.FC<VodTypesProps> = ({ site }) => {
 
                 {canScrollRight && (
                     <button onClick={() => scroll('right')} className={styles['scroll-button']} aria-label="向右滚动">
-                        <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <svg style={{ width: 16, height: 16 }} fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                         </svg>
                     </button>

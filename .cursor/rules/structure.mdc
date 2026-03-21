@@ -33,6 +33,7 @@ lib/                    # 业务逻辑和工具
 ├── constant/           # 常量定义
 ├── hooks/              # 自定义 Hooks
 ├── store/              # Zustand 状态管理
+├── themes/             # 主题配置
 ├── types/              # TypeScript 类型定义
 └── utils/              # 工具函数
     └── request/        # HTTP 请求封装
@@ -77,5 +78,7 @@ src-tauri/              # Tauri 桌面端
 ## 关键文件位置
 - 类型定义：[lib/types/index.ts](mdc:lib/types/index.ts)
 - HTTP 请求封装：[lib/utils/request/index.ts](mdc:lib/utils/request/index.ts)
-- 主题配置：[components/providers/ThemeProvider.tsx](mdc:components/providers/ThemeProvider.tsx)
+- 主题配置：[lib/themes/index.ts](mdc:lib/themes/index.ts)
+- 主题 Provider：[components/providers/ThemeProvider.tsx](mdc:components/providers/ThemeProvider.tsx)
+- 主题状态：[lib/store/useThemeStore.ts](mdc:lib/store/useThemeStore.ts)
 - 站点状态：[lib/store/useVodSitesStore.ts](mdc:lib/store/useVodSitesStore.ts)

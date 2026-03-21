@@ -91,7 +91,7 @@
 
     &.active {
         color: var(--color-text);
-        background: rgba(225, 29, 72, 0.12);
+        background: var(--color-primary-alpha-hover);
 
         .tab-label {
             font-weight: 600;

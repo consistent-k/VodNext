@@ -3,7 +3,7 @@
     width: 100%;
 
     &-filters {
-        background: rgba(15, 15, 35, 0.6);
+        background: var(--color-bg-container-alpha);
         border-radius: 12px;
         border: 1px solid var(--color-border);
         margin-bottom: 24px;
@@ -43,18 +43,18 @@
         cursor: pointer;
         transition: all 0.2s;
         color: var(--color-text-secondary);
-        background: rgba(30, 27, 75, 0.5);
+        background: var(--color-bg-elevated-alpha);
         border: 1px solid transparent;
 
         &:hover {
             color: var(--color-text);
-            background: rgba(30, 27, 75, 0.8);
+            background: var(--color-bg-elevated-hover);
         }
 
         &.active {
             color: var(--color-primary);
-            background: rgba(225, 29, 72, 0.1);
-            border-color: rgba(225, 29, 72, 0.3);
+            background: var(--color-primary-alpha-low);
+            border-color: var(--color-primary-alpha-medium);
         }
     }
 }

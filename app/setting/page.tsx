@@ -1,9 +1,10 @@
 'use client';
 import { InfoCircleOutlined } from '@ant-design/icons';
-import { Form, Input, Button, Flex, Select, App, Steps, theme, Descriptions } from 'antd';
+import { Form, Input, Button, Flex, Select, App, Steps, Descriptions, Divider } from 'antd';
 import React, { useState } from 'react';
 
 import styles from './index.module.scss';
+import { ThemeSelector } from '@/components/ui/ThemeSelector';
 import useSettingStore from '@/lib/store/useSettingStore';
 import { useVodSitesStore } from '@/lib/store/useVodSitesStore';
 
@@ -15,7 +16,6 @@ const SettingPage: React.FC = () => {
 
     const [current, setCurrent] = useState(0);
 
-    const { token } = theme.useToken();
     const { message } = App.useApp();
 
     const handleSubmit = async () => {
@@ -201,22 +201,13 @@ const SettingPage: React.FC = () => {
 
     const items = steps.map((item) => ({ key: item.title, title: item.title }));
 
-    const contentStyle: React.CSSProperties = {
-        color: token.colorTextTertiary,
-        backgroundColor: '#0F0F23',
-        borderRadius: token.borderRadiusLG,
-        border: '1px solid #334155',
-        marginTop: 16,
-        padding: 24
-    };
-
     return (
         <Flex className={styles['vod-next-setting']} vertical>
             <Steps current={current} items={items} />
             <Form
                 form={form}
                 layout="vertical"
-                style={contentStyle}
+                className={styles['setting-form-content']}
                 autoComplete="off"
                 requiredMark={false}
                 preserve
@@ -236,7 +227,11 @@ const SettingPage: React.FC = () => {
                 {steps[current].content}
             </Form>
 
-            <div style={{ marginTop: 24 }}>{steps[current].buttons}</div>
+            <div className={styles['setting-form-buttons']}>{steps[current].buttons}</div>
+
+            <Divider className={styles['setting-divider']} />
+
+            <ThemeSelector />
         </Flex>
     );
 };

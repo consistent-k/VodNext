@@ -63,8 +63,8 @@ export default MyComponent;
 ## 样式规范
 - 使用 SCSS Modules（`index.module.scss`）
 - 类名使用 `vod-next-` 前缀
-- 支持亮色/暗色主题
-- 使用 Tailwind CSS 工具类
+- 支持多主题切换（midnight、aurora、cyber）
+- 所有颜色必须使用 CSS 变量
 - Ant Design 组件优先使用
 
 ### 颜色使用规范
@@ -81,17 +81,29 @@ color: #94a3b8;
 border: 1px solid rgba(51, 65, 85, 0.5);
 ```
 
-**可用 CSS 变量**（定义在 `globals.scss`）：
-- **品牌色**: `--color-primary`, `--color-primary-light`
-- **背景色**: `--color-bg`, `--color-bg-container`, `--color-bg-elevated`
-- **文字色**: `--color-text`, `--color-text-secondary`, `--color-text-tertiary`
-- **边框色**: `--color-border`, `--color-border-secondary`
+**可用 CSS 变量**（定义在 `globals.scss`，由主题系统动态更新）：
 
-**对应 Tailwind 配置**：
-- `primary` → `--color-primary`
-- `bg` → `--color-bg`
-- `text` → `--color-text`
-- `border` → `--color-border`
+| 分类 | 变量名 | 说明 |
+|------|--------|------|
+| 品牌色 | `--color-primary` | 主色调 |
+| 品牌色 | `--color-primary-light` | 主色亮色 |
+| 背景色 | `--color-bg` | 页面背景 |
+| 背景色 | `--color-bg-container` | 容器背景 |
+| 背景色 | `--color-bg-elevated` | 高级背景 |
+| 背景色 | `--color-bg-container-alpha` | 容器背景（半透明） |
+| 背景色 | `--color-bg-elevated-alpha` | 高级背景（半透明） |
+| 背景色 | `--color-bg-elevated-hover` | 悬停状态背景 |
+| 文字色 | `--color-text` | 主要文字 |
+| 文字色 | `--color-text-secondary` | 次要文字 |
+| 文字色 | `--color-text-tertiary` | 三级文字 |
+| 边框色 | `--color-border` | 边框 |
+| 边框色 | `--color-border-secondary` | 次要边框 |
+| 状态色 | `--color-primary-alpha-low` | 主色低透明度（选中） |
+| 状态色 | `--color-primary-alpha-medium` | 主色中透明度（边框） |
+| 状态色 | `--color-primary-alpha-hover` | 主色悬停状态 |
+| 状态色 | `--color-primary-shadow` | 主色阴影 |
+| 遮罩色 | `--color-overlay` | 遮罩层背景 |
+| 遮罩色 | `--color-overlay-border` | 遮罩层边框 |
 
 **渐变色**允许使用硬编码值，但建议定义为 CSS 变量：
 ```scss
@@ -101,6 +113,14 @@ background: linear-gradient(90deg, var(--color-primary), var(--color-primary-lig
 // 更好：定义渐变变量
 background: var(--gradient-primary);
 ```
+
+### 主题配置
+项目支持三套内置主题，定义在 `lib/themes/index.ts`：
+- **midnight**: 午夜玫瑰（深色，红色主调）
+- **aurora**: 极光清新（浅色，青色主调）
+- **cyber**: 赛博霓虹（深色，紫色主调）
+
+主题切换通过 `useThemeStore` 管理，会同步更新 CSS 变量和 Ant Design 主题配置。
 
 ## 状态管理规范
 - Zustand Store 使用 `persist` 中间件
