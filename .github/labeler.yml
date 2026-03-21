@@ -1,0 +1,33 @@
+frontend:
+    - changed-files:
+          - any-glob-to-any-file:
+                - 'app/**'
+                - 'components/**'
+
+backend:
+    - changed-files:
+          - any-glob-to-any-file:
+                - 'lib/**'
+                - 'services/**'
+
+desktop:
+    - changed-files:
+          - any-glob-to-any-file:
+                - 'src-tauri/**'
+
+ci:
+    - changed-files:
+          - any-glob-to-any-file:
+                - '.github/**'
+
+styles:
+    - changed-files:
+          - any-glob-to-any-file:
+                - '**/*.scss'
+                - '**/*.css'
+
+dependencies:
+    - changed-files:
+          - any-glob-to-any-file:
+                - 'package.json'
+                - 'pnpm-lock.yaml'

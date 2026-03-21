@@ -1,64 +1,110 @@
 .vod-list {
-    margin-bottom: 16px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 20px;
+
     &-item {
+        display: flex;
+        flex-direction: column;
+        cursor: pointer;
+
         &-cover {
-            transition: filter 0.2s;
-            filter: brightness(0.8);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
             height: 0;
             padding-top: 140%;
             background-position: 50% 50%;
             background-size: cover;
             overflow: hidden;
-            border-radius: 8px;
+            border-radius: 12px;
+            background-color: var(--color-bg-container);
+            border: 1px solid var(--color-border-secondary);
+
             img {
-                &:hover {
-                    transform: scale(1.05);
-                    transition-duration: 300ms;
+                transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            }
+
+            &:hover {
+                transform: translateY(-4px);
+                box-shadow: 0 12px 40px rgba(225, 29, 72, 0.25);
+                border-color: rgba(225, 29, 72, 0.4);
+
+                img {
+                    transform: scale(1.08);
+                }
+
+                .vod-list-item-cover-play {
+                    opacity: 1;
                 }
             }
-            &:hover {
-                box-shadow: 0 0 20px 0 rgb(99 102 241 / 20%);
-                filter: brightness(1) saturate(110%);
+
+            &-play {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                width: 48px;
+                height: 48px;
+                background: var(--color-primary);
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                opacity: 0;
+                transition: opacity 0.3s;
+                backdrop-filter: blur(8px);
+                box-shadow: 0 4px 20px rgba(225, 29, 72, 0.4);
+
+                svg {
+                    margin-left: 2px;
+                }
             }
+
             &-new {
                 position: absolute;
-                top: 0;
-                right: 0;
+                top: 8px;
+                right: 8px;
                 color: #fff;
-                border-radius: 0 5px 0 5px;
-                padding: 0px 5px;
-                background: #f96518;
+                border-radius: 6px;
+                padding: 3px 8px;
+                background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-light) 100%);
                 z-index: 1;
-                font-size: 12px;
+                font-size: 11px;
+                font-weight: 600;
+                box-shadow: 0 2px 8px rgba(225, 29, 72, 0.3);
             }
+
             &-douban {
                 position: absolute;
-                top: 5px;
-                left: 5px;
+                top: 8px;
+                left: 8px;
                 z-index: 1;
-                background: #41ac52;
-                padding: 0 5px;
+                background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+                padding: 3px 8px;
                 pointer-events: none;
                 color: #fff;
-                font-weight: 500;
-                font-size: 12px;
-                border-radius: 2px;
+                font-weight: 600;
+                font-size: 11px;
+                border-radius: 6px;
+                box-shadow: 0 2px 8px rgba(34, 197, 94, 0.3);
             }
+
             &-remarks {
                 position: absolute;
-                right: 10px;
-                bottom: 3px;
+                right: 8px;
+                bottom: 8px;
                 z-index: 1;
                 pointer-events: none;
                 color: #fff;
                 font-weight: 600;
-                background: linear-gradient(90deg, #6366f1 0%, #a5b4fc 100%);
+                background: rgba(0, 0, 0, 0.7);
+                backdrop-filter: blur(8px);
                 border-radius: 6px;
-                padding: 2px 8px;
-                font-size: 12px;
-                box-shadow: 0 2px 8px rgba(99,102,241,0.10);
+                padding: 3px 8px;
+                font-size: 11px;
+                border: 1px solid rgba(255, 255, 255, 0.1);
             }
+
             &-pic {
                 position: absolute !important;
                 top: 0;
@@ -70,21 +116,26 @@
                 justify-content: center;
             }
         }
+
         &-info {
             margin-top: 12px;
             width: 100%;
+
             &-title {
-                text-align: center;
+                text-align: left;
                 font-size: 14px;
-                font-weight: 600;
+                font-weight: 500;
                 display: block;
                 text-overflow: ellipsis;
                 overflow: hidden;
                 white-space: nowrap;
                 cursor: pointer;
                 transition: color 0.2s;
+                color: var(--color-text-secondary);
+                line-height: 1.4;
+
                 &:hover {
-                    color: #6366f1;
+                    color: var(--color-text);
                 }
             }
         }

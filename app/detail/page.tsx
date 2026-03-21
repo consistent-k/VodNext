@@ -1,11 +1,12 @@
 'use client';
-import { App, Descriptions, Flex, Select, Spin, Tag, theme, Typography } from 'antd';
+import { App, Descriptions, Flex, Select, Typography } from 'antd';
 import { includes } from 'lodash';
 import dynamic from 'next/dynamic';
 import { useRouter, useSearchParams } from 'next/navigation';
 import React, { Suspense, useEffect, useMemo, useState } from 'react';
 
 import styles from './index.module.scss';
+import { Loading } from '@/components/ui/Loading';
 import { PalyerProps } from '@/components/video/VodPalyer';
 import useIsMobile from '@/lib/hooks/useIsMobile';
 import { DetailData, VodPlayList } from '@/lib/types';
@@ -27,7 +28,6 @@ const DetailPage: React.FC = () => {
     const [activeUrl, setActiveUrl] = useState('');
 
     const { message } = App.useApp();
-    const { token } = theme.useToken();
 
     const [playerUrl, setPlayerUrl] = useState('');
 
@@ -42,35 +42,6 @@ const DetailPage: React.FC = () => {
 
         return showType;
     }, [playerUrl]);
-
-    const handleDetail = async (id: string | number) => {
-        try {
-            const res = await detailApi(site as string, {
-                id
-            });
-            const { code, data } = res;
-            if (code === 0 && data.length > 0) {
-                setMovieDetail(data[0]);
-                setActivePlayList(data[0].vod_play_list[0]);
-                setActiveUrl(data[0].vod_play_list[0].urls[0].url);
-                handlePlay(data[0].vod_play_list[0].urls[0].url, data[0].vod_play_list[0].parse_urls || []);
-            }
-        } catch (error) {
-            console.log(error);
-        }
-    };
-
-    useEffect(() => {
-        if (typeof site !== 'string' || !site) {
-            router.push('/home');
-        }
-    }, [site]);
-
-    useEffect(() => {
-        if (typeof id === 'string' && id) {
-            handleDetail(decodeURIComponent(id));
-        }
-    }, [id]);
 
     const handlePlay = async (url: string, parse_urls: string[]) => {
         try {
@@ -89,8 +60,37 @@ const DetailPage: React.FC = () => {
         }
     };
 
+    const handleDetail = async (id: string | number) => {
+        try {
+            const res = await detailApi(site as string, {
+                id
+            });
+            const { code, data } = res;
+            if (code === 0 && data.length > 0) {
+                setMovieDetail(data[0]);
+                setActivePlayList(data[0].vod_play_list[0]);
+                setActiveUrl(data[0].vod_play_list[0].urls[0].url);
+                handlePlay(data[0].vod_play_list[0].urls[0].url, data[0].vod_play_list[0].parse_urls || []);
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    };
+    useEffect(() => {
+        if (typeof id === 'string' && id) {
+            // eslint-disable-next-line
+            handleDetail(decodeURIComponent(id));
+        }
+    }, [id]);
+
+    useEffect(() => {
+        if (typeof site !== 'string' || !site) {
+            router.push('/home');
+        }
+    }, [site]);
+
     if (!movieDetail) {
-        return <Spin fullscreen />;
+        return <Loading fullscreen />;
     }
 
     const CommonDescriptions = () => {
@@ -105,40 +105,21 @@ const DetailPage: React.FC = () => {
 
     return (
         <div className={styles['vod-next-detail']}>
-            <Flex vertical={isMobile}>
-                <DynamicPalyerWithNoSSR
-                    url={playerUrl}
-                    onError={(msg) => {
-                        message.error(msg);
-                    }}
-                    showType={playerShowType}
-                    style={{ width: isMobile ? '100%' : 'calc(100% - 400px)' }}
-                />
-                <Flex
-                    vertical
-                    className={styles['vod-next-detail-playlist']}
-                    gap={16}
-                    flex={1}
-                    style={{
-                        paddingLeft: isMobile ? 0 : 16
-                    }}
-                >
-                    {!isMobile && (
-                        <Descriptions
-                            title={<div>{movieDetail?.vod_name}</div>}
-                            column={1}
-                            styles={{
-                                label: {
-                                    minWidth: 80
-                                }
-                            }}
-                        >
-                            {CommonDescriptions()}
-                        </Descriptions>
-                    )}
+            <Flex vertical={isMobile} gap={24}>
+                <div className={styles['vod-next-detail-player']} style={{ width: isMobile ? '100%' : 'calc(100% - 400px)' }}>
+                    <DynamicPalyerWithNoSSR
+                        url={playerUrl}
+                        onError={(msg) => {
+                            message.error(msg);
+                        }}
+                        showType={playerShowType}
+                        style={{ width: '100%' }}
+                    />
+                </div>
 
-                    <Flex justify="space-between" align="center">
-                        <span style={{ fontSize: 20 }}>选集播放</span>
+                <div className={styles['vod-next-detail-playlist']} style={{ flex: 1 }}>
+                    <div className={styles['vod-next-detail-header']}>
+                        <span className={styles['vod-next-detail-title']}>选集播放</span>
                         <Select
                             style={{ width: 130 }}
                             options={movieDetail?.vod_play_list.map((item) => {
@@ -155,31 +136,13 @@ const DetailPage: React.FC = () => {
                                 setActivePlayList(active);
                             }}
                         />
-                    </Flex>
+                    </div>
 
-                    <Flex
-                        wrap="wrap"
-                        style={{
-                            rowGap: 8,
-                            columnGap: 6,
-                            maxHeight: 400,
-                            overflowY: 'auto'
-                        }}
-                        align="center"
-                    >
+                    <div className={styles['vod-next-detail-episodes']}>
                         {activePlayList?.urls.map((item, index) => (
-                            <Tag
+                            <div
                                 key={`${item.url}-${index.toString()}`}
-                                style={{
-                                    cursor: 'pointer',
-                                    width: 'calc(33.33% - 6px)',
-                                    textAlign: 'center',
-                                    borderColor: activeUrl === item.url ? token.colorPrimary : '',
-                                    margin: 0,
-                                    overflow: 'hidden',
-                                    textOverflow: 'ellipsis',
-                                    whiteSpace: 'nowrap'
-                                }}
+                                className={`${styles['vod-next-detail-episode']} ${activeUrl === item.url ? styles['active'] : ''}`}
                                 title={item.name}
                                 onClick={() => {
                                     setActiveUrl(item.url);
@@ -187,13 +150,13 @@ const DetailPage: React.FC = () => {
                                 }}
                             >
                                 {item.name}
-                            </Tag>
+                            </div>
                         ))}
-                    </Flex>
-                </Flex>
+                    </div>
+                </div>
             </Flex>
 
-            <Flex className={styles['vod-next-detail-info']} justify="space-between" gap={16}>
+            <div className={styles['vod-next-detail-info']}>
                 <Descriptions
                     title={<div>{movieDetail?.vod_name}</div>}
                     column={1}
@@ -210,15 +173,16 @@ const DetailPage: React.FC = () => {
                     <Descriptions.Item label="演员">
                         <Paragraph ellipsis={{ rows: isMobile ? 5 : 10, expandable: false }}>{movieDetail?.vod_actor}</Paragraph>
                     </Descriptions.Item>
+                    {!isMobile && CommonDescriptions()}
                 </Descriptions>
-            </Flex>
+            </div>
         </div>
     );
 };
 
 const SuspenseDetailPage = () => {
     return (
-        <Suspense fallback={<Spin fullscreen />}>
+        <Suspense fallback={<Loading fullscreen />}>
             <DetailPage />
         </Suspense>
     );

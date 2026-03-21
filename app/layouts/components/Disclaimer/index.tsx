@@ -1,19 +1,12 @@
 import { Modal } from 'antd';
 import { Typography } from 'antd';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import store from 'store2';
 
 const { Paragraph } = Typography;
 
 const Disclaimer: React.FC = () => {
-    const [open, setOpen] = useState(false);
-
-    useEffect(() => {
-        const disclaimer = store.get('vod_next_disclaimer_agree');
-        if (!disclaimer) {
-            setOpen(true);
-        }
-    }, []);
+    const [open, setOpen] = useState(() => !store.get('vod_next_disclaimer_agree'));
 
     return (
         <Modal

@@ -4,6 +4,7 @@ import dayjs from 'dayjs';
 import { usePathname } from 'next/navigation';
 import React, { PropsWithChildren, useMemo } from 'react';
 
+import styles from './BasicLayout.module.scss';
 import Disclaimer from './components/Disclaimer';
 import SiteHeader from './components/SiteHeader';
 import VodTypes from '@/components/video/VodTypes';
@@ -36,14 +37,18 @@ const BasicLayout: React.FC<PropsWithChildren> = ({ children }) => {
     }, [isHomePage, isCategoryPage]);
 
     return (
-        <Layout style={{ fontFamily: 'Microsoft YaHei', height: '100%' }}>
+        <Layout className={styles['vod-layout']}>
             <Disclaimer></Disclaimer>
             {!isSettingPage && <SiteHeader></SiteHeader>}
-            <Content style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
+            <Content className={styles['vod-layout-content']}>
                 {showVodTypes && <VodTypes site={current_site}></VodTypes>}
-                <div style={{ flex: 1, overflowY: 'auto' }}>{children}</div>
+                <div className={styles['vod-layout-main']}>{children}</div>
             </Content>
-            <Footer style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: 30 }}>©{dayjs().year()} VodNext 仅供学习交流使用</Footer>
+            <Footer className={styles['vod-layout-footer']}>
+                <span>©{dayjs().year()} VodNext</span>
+                <span className={styles['vod-layout-footer-divider']}>|</span>
+                <span>仅供学习交流使用</span>
+            </Footer>
         </Layout>
     );
 };

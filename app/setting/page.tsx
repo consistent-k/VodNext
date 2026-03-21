@@ -1,18 +1,15 @@
 'use client';
 import { InfoCircleOutlined } from '@ant-design/icons';
-import { Form, Input, Button, Flex, Switch, Select, App, Steps, theme, Descriptions } from 'antd';
-import { isBoolean } from 'lodash';
+import { Form, Input, Button, Flex, Select, App, Steps, theme, Descriptions } from 'antd';
 import React, { useState } from 'react';
 
 import styles from './index.module.scss';
 import useSettingStore from '@/lib/store/useSettingStore';
-import { useThemeStore } from '@/lib/store/useThemeStore';
 import { useVodSitesStore } from '@/lib/store/useVodSitesStore';
 
 const SettingPage: React.FC = () => {
     const { vod_hub_api, site_name, setting, updateSetting } = useSettingStore();
     const [form] = Form.useForm();
-    const { isDarkMode, toggleTheme } = useThemeStore();
 
     const { getVodTypes, sites, isInitialized, hasError, clearVodTypes } = useVodSitesStore();
 
@@ -44,6 +41,19 @@ const SettingPage: React.FC = () => {
         }
     };
 
+    const next = async () => {
+        try {
+            await form.validateFields();
+            setCurrent(current + 1);
+        } catch (error) {
+            console.log('验证失败:', error);
+        }
+    };
+
+    const prev = () => {
+        setCurrent(current - 1);
+    };
+
     const steps = [
         {
             title: '基础设置',
@@ -56,10 +66,6 @@ const SettingPage: React.FC = () => {
                                 width: 300
                             }}
                         />
-                    </Form.Item>
-
-                    <Form.Item label="网站主题" name="theme" valuePropName="checked">
-                        <Switch checkedChildren="亮色主题" unCheckedChildren="暗色主题"></Switch>
                     </Form.Item>
 
                     <Form.Item
@@ -162,14 +168,13 @@ const SettingPage: React.FC = () => {
                 <Descriptions
                     bordered
                     title="当前配置"
+                    column={1}
+                    labelStyle={{ width: 140 }}
+                    contentStyle={{ minWidth: 200 }}
                     items={[
                         {
                             label: '网站名称',
                             children: form.getFieldValue('site_name')
-                        },
-                        {
-                            label: '网站主题',
-                            children: form.getFieldValue('theme') ? '暗色主题' : '亮色主题'
                         },
                         {
                             label: 'VodHub API 地址',
@@ -196,26 +201,13 @@ const SettingPage: React.FC = () => {
 
     const items = steps.map((item) => ({ key: item.title, title: item.title }));
 
-    const next = async () => {
-        try {
-            await form.validateFields();
-            setCurrent(current + 1);
-        } catch (error) {
-            console.log('验证失败:', error);
-        }
-    };
-
-    const prev = () => {
-        setCurrent(current - 1);
-    };
-
     const contentStyle: React.CSSProperties = {
         color: token.colorTextTertiary,
-        backgroundColor: token.colorFillAlter,
+        backgroundColor: '#0F0F23',
         borderRadius: token.borderRadiusLG,
-        border: `1px dashed ${token.colorBorder}`,
+        border: '1px solid #334155',
         marginTop: 16,
-        padding: 16
+        padding: 24
     };
 
     return (
@@ -231,17 +223,9 @@ const SettingPage: React.FC = () => {
                 initialValues={{
                     site_name: site_name || 'VodNext',
                     vod_hub_api: vod_hub_api || '/',
-                    theme: isDarkMode,
                     current_site: ''
                 }}
                 onValuesChange={(changedValues) => {
-                    if ('theme' in changedValues) {
-                        // 判断如果是主题修改则直接调用
-                        if (isBoolean(changedValues.theme)) {
-                            toggleTheme();
-                        }
-                    }
-
                     if ('current_site' in changedValues) {
                         if (changedValues.current_site) {
                             updateSetting({ ...setting, current_site: changedValues.current_site });

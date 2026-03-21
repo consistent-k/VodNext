@@ -1,0 +1,120 @@
+---
+description: 编码规范和风格指南
+globs: 
+alwaysApply: true
+---
+# 编码规范
+
+## TypeScript 规范
+- 使用严格模式 (`strict: true`)
+- 允许使用 `any` 类型（`@typescript-eslint/no-explicit-any: off`）
+- 允许使用 `@ts-ignore`（`@typescript-eslint/ban-ts-comment: off`）
+- 优先使用 `interface` 定义对象类型
+- API 响应使用泛型（`async get<T>(url, config): Promise<T>`）
+
+## 命名规范
+- **组件**: PascalCase（如 `InitProvider`, `VodList`）
+- **Hooks**: camelCase + `use` 前缀（如 `useIsMobile`, `useThemeStore`）
+- **Store**: camelCase + `use` 前缀 + `Store` 后缀（如 `useSettingStore`）
+- **文件**: 组件 `.tsx`，其他 `.ts`
+- **常量**: UPPER_SNAKE_CASE（如 `DEFAULT_CONFIG`）
+- **类型**: PascalCase（如 `HomeData`, `VodListProps`）
+
+## 导入规范
+导入顺序（ESLint import/order 规则）：
+1. Node 内置模块
+2. 外部依赖包
+3. 内部模块（`@/`）、父级、同级、index
+
+每个分组之间用空行分隔，组内按字母排序（不区分大小写）。
+
+```typescript
+// 示例
+import { Button } from 'antd';
+import { useRouter } from 'next/navigation';
+import { useEffect } from 'react';
+
+import useSettingStore from '@/lib/store/useSettingStore';
+import { useVodSitesStore } from '@/lib/store/useVodSitesStore';
+```
+
+## 组件编写规范
+- 客户端组件必须添加 `'use client'` 指令
+- Props 使用接口定义并解构
+- 使用箭头函数或函数声明（保持一致）
+- 组件导出使用 `export default`
+
+```typescript
+'use client';
+import { FC } from 'react';
+
+export interface MyComponentProps {
+    title: string;
+    onClick?: () => void;
+}
+
+const MyComponent: FC<MyComponentProps> = ({ title, onClick }) => {
+    return <div onClick={onClick}>{title}</div>;
+};
+
+export default MyComponent;
+```
+
+## 样式规范
+- 使用 SCSS Modules（`index.module.scss`）
+- 类名使用 `vod-next-` 前缀
+- 支持亮色/暗色主题
+- 使用 Tailwind CSS 工具类
+- Ant Design 组件优先使用
+
+### 颜色使用规范
+**必须使用 CSS 变量**，禁止硬编码颜色值：
+```scss
+// ✅ 正确：使用 CSS 变量
+background: var(--color-bg-container);
+color: var(--color-text-secondary);
+border: 1px solid var(--color-border-secondary);
+
+// ❌ 错误：硬编码颜色值
+background: #0f0f23;
+color: #94a3b8;
+border: 1px solid rgba(51, 65, 85, 0.5);
+```
+
+**可用 CSS 变量**（定义在 `globals.scss`）：
+- **品牌色**: `--color-primary`, `--color-primary-light`
+- **背景色**: `--color-bg`, `--color-bg-container`, `--color-bg-elevated`
+- **文字色**: `--color-text`, `--color-text-secondary`, `--color-text-tertiary`
+- **边框色**: `--color-border`, `--color-border-secondary`
+
+**对应 Tailwind 配置**：
+- `primary` → `--color-primary`
+- `bg` → `--color-bg`
+- `text` → `--color-text`
+- `border` → `--color-border`
+
+**渐变色**允许使用硬编码值，但建议定义为 CSS 变量：
+```scss
+// 可接受：渐变色
+background: linear-gradient(90deg, var(--color-primary), var(--color-primary-light));
+
+// 更好：定义渐变变量
+background: var(--gradient-primary);
+```
+
+## 状态管理规范
+- Zustand Store 使用 `persist` 中间件
+- Store 文件命名：`use{Name}Store.ts`
+- 使用 `store2` 进行 localStorage 操作
+
+## 错误处理规范
+- HTTP 错误：在拦截器中返回 `Promise.reject(error)`
+- API 调用：使用 try/catch 包装，重新抛出 `Promise.reject`
+- 组件错误：使用 `message` 组件显示错误信息
+
+## 代码格式
+- **引号**: 单引号
+- **尾逗号**: 无
+- **缩进**: 4 空格
+- **行宽**: 200 字符
+- **换行**: LF

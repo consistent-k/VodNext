@@ -1,10 +1,10 @@
 'use client';
-import { Button, Collapse, CollapseProps, Flex, Spin, theme } from 'antd';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { Suspense, useEffect, useMemo, useState } from 'react';
 import store from 'store2';
 
 import styles from './index.module.scss';
+import { Loading } from '@/components/ui/Loading';
 import VodList from '@/components/video/VodList';
 import { CategoryVodData, HomeData } from '@/lib/types';
 import { categoryApi, CategoryParams } from '@/services';
@@ -12,7 +12,6 @@ import { categoryApi, CategoryParams } from '@/services';
 const CategoryPage = () => {
     const [categoryList, setCategoryList] = useState<CategoryVodData[]>([]);
     const [loading, setLoading] = useState(true);
-    const { token } = theme.useToken();
 
     const searchParams = useSearchParams();
     const router = useRouter();
@@ -21,7 +20,6 @@ const CategoryPage = () => {
     const name = searchParams.get('name') || '';
     const site = searchParams.get('site') || '';
     const [filters, setFilters] = useState<CategoryParams['filters']>();
-    const [activeKey, setActiveKey] = useState<string[]>([]);
 
     const getCategory = async (id: string | number, filters?: CategoryParams['filters']) => {
         setLoading(true);
@@ -79,75 +77,47 @@ const CategoryPage = () => {
         order: '排序'
     };
 
-    const items: CollapseProps['items'] = [
-        {
-            key: '1',
-            label: (
-                <Flex gap={10}>
-                    <Button style={{ padding: '0 2px' }} size="small" type="text">
-                        筛选
-                    </Button>
-                    {filters && (
-                        <Button size="small" type="text" onClick={() => setFilters(undefined)}>
-                            重置
-                        </Button>
-                    )}
-                </Flex>
-            ),
-            children: (
-                <Flex vertical gap={16} style={{ marginBottom: 20 }}>
-                    {currentData?.filters?.map((item) => {
-                        return (
-                            <Flex key={item.type} gap={10}>
-                                <Button style={{ flexShrink: 0, padding: '0 2px' }} size="small" type="text">
-                                    {typeMap[item.type]}:
-                                </Button>
-                                <Flex gap={8} wrap="wrap">
-                                    {item.children.map((cItem) => {
-                                        return (
-                                            <Button
-                                                key={cItem.label}
-                                                size="small"
-                                                type="text"
-                                                // @ts-ignore
-                                                style={{ padding: '0 2px', color: filters?.[item.type] === cItem.value ? token.colorPrimary : undefined }}
-                                                onClick={() => {
-                                                    setFilters({
-                                                        ...filters,
-                                                        [item.type]: cItem.label === '全部' ? '' : cItem.value
-                                                    });
-                                                }}
-                                            >
-                                                {cItem.label}
-                                            </Button>
-                                        );
-                                    })}
-                                </Flex>
-                            </Flex>
-                        );
-                    })}
-                </Flex>
-            ),
-            showArrow: false
+    const handleFilterChange = (type: string, value: string) => {
+        const newFilters = { ...filters } as any;
+        if (value === '') {
+            delete newFilters[type];
+        } else {
+            newFilters[type] = value;
         }
-    ];
+        setFilters(newFilters);
+    };
 
     return (
         <div className={styles['vod-next-category']}>
             {loading ? (
-                <Spin tip="加载中" fullscreen />
+                <Loading fullscreen description="加载中" />
             ) : (
                 <>
-                    {currentData?.filters.length ? (
-                        <Collapse
-                            activeKey={activeKey}
-                            ghost
-                            items={items}
-                            style={{ paddingBottom: 10 }}
-                            onChange={(key) => {
-                                setActiveKey(key);
-                            }}
-                        />
+                    {currentData?.filters?.length ? (
+                        <div className={styles['vod-next-category-filters']}>
+                            {currentData.filters.map((item) => {
+                                return (
+                                    <div key={item.type} className={styles['vod-next-category-filter']}>
+                                        <div className={styles['vod-next-category-label']}>{typeMap[item.type]}</div>
+                                        <div className={styles['vod-next-category-options']}>
+                                            {item.children.map((cItem) => {
+                                                return (
+                                                    <div
+                                                        key={cItem.label}
+                                                        className={`${styles['vod-next-category-option']} ${(filters as any)?.[item.type] === cItem.value ? styles['active'] : ''}`}
+                                                        onClick={() => {
+                                                            handleFilterChange(item.type, cItem.label === '全部' ? '' : cItem.value);
+                                                        }}
+                                                    >
+                                                        {cItem.label}
+                                                    </div>
+                                                );
+                                            })}
+                                        </div>
+                                    </div>
+                                );
+                            })}
+                        </div>
                     ) : null}
 
                     <VodList
@@ -164,7 +134,7 @@ const CategoryPage = () => {
 
 const SuspenseCategoryPage = () => {
     return (
-        <Suspense fallback={<Spin fullscreen />}>
+        <Suspense fallback={<Loading fullscreen />}>
             <CategoryPage />
         </Suspense>
     );

@@ -1,14 +1,33 @@
 ---
-description: 
+description: 项目背景和技术栈说明
 globs: 
-alwaysApply: false
+alwaysApply: true
 ---
 # 项目背景说明
 
-本项目为一个基于 Next.js 和 Tauri 的多端视频聚合播放器，支持 Web 和桌面端。
+VodNext 是一个基于 Next.js 和 Tauri 的多端视频聚合播放器，支持 Web 和桌面端。
 
-- 前端采用 Next.js（React）实现，支持服务端渲染和静态生成。
-- 桌面端通过 Tauri 集成，支持跨平台（Windows、macOS、Linux）运行。
-- 项目聚合多个视频源，支持分类浏览、搜索、播放等功能。
-- 主要技术栈包括 TypeScript、SCSS、React、Tauri、Rust（桌面端部分）。
-- 适合需要聚合多站点视频内容并统一播放体验的场景。
+## 核心功能
+- 前端采用 Next.js（React）实现，支持服务端渲染和静态生成
+- 桌面端通过 Tauri 集成，支持跨平台（Windows、macOS、Linux）运行
+- 项目聚合多个视频源，支持分类浏览、搜索、播放等功能
+- 适合需要聚合多站点视频内容并统一播放体验的场景
+
+## 技术栈
+- **框架**: Next.js 16 + React 19 + TypeScript
+- **状态管理**: Zustand + Valtio
+- **UI 组件库**: Ant Design 6
+- **样式方案**: Tailwind CSS 4 + SCSS Modules
+- **桌面端**: Tauri 2（Rust 后端）
+- **HTTP 客户端**: Axios（Web）/ Tauri plugin-http（桌面端）
+- **视频播放**: xgplayer + HLS.js
+- **包管理**: pnpm 10.10.0
+
+## 开发工具
+- **代码检查**: ESLint + Prettier
+- **Git 钩子**: Husky + lint-staged
+- **提交规范**: Commitlint + commitizen
+
+## 环境要求
+- Node.js >= 22
+- pnpm >= 10.10.0

@@ -1,4 +1,4 @@
-import { MoonOutlined, SettingOutlined, SunOutlined } from '@ant-design/icons';
+import { SettingOutlined } from '@ant-design/icons';
 import { Button, Flex, Layout } from 'antd';
 import { useRouter } from 'next/navigation';
 
@@ -6,13 +6,11 @@ import styles from './index.module.scss';
 import VodSearch from '@/components/video/VodSearch';
 import VodSites from '@/components/video/VodSites';
 import useSettingStore from '@/lib/store/useSettingStore';
-import { useThemeStore } from '@/lib/store/useThemeStore';
 import { useVodSitesStore } from '@/lib/store/useVodSitesStore';
 
 const { Header } = Layout;
 
 const SiteHeader = () => {
-    const { isDarkMode, toggleTheme } = useThemeStore();
     const router = useRouter();
 
     const { current_site, setting, updateSetting } = useSettingStore();
@@ -22,16 +20,22 @@ const SiteHeader = () => {
     const { sites } = useVodSitesStore();
 
     return (
-        <Header className={styles['vod-header']} style={{ background: isDarkMode ? '#16161a' : 'linear-gradient(135deg, #f5f7fa 0%, #e3e8f0 100%)' }} data-tauri-drag-region>
-            <Flex gap={8} align="center" justify="center">
+        <Header className={styles['vod-header']} data-tauri-drag-region>
+            <Flex gap={20} align="center">
                 <Flex
-                    style={{ cursor: 'pointer', minWidth: 60, fontSize: 18 }}
+                    className={styles['vod-header-logo']}
                     onClick={() => {
                         router.push('/home');
                     }}
                     align="center"
+                    gap={10}
                 >
-                    {site_name || 'VodNext'}
+                    <div className={styles['vod-header-logo-icon']}>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M9 8L15 12L9 16V8Z" fill="currentColor" />
+                        </svg>
+                    </div>
+                    <span className={styles['vod-header-title']}>{site_name || 'VodNext'}</span>
                 </Flex>
                 <VodSites
                     options={sites}
@@ -42,23 +46,16 @@ const SiteHeader = () => {
                     }}
                 />
             </Flex>
-            <Flex gap={10}>
+            <Flex gap={8} align="center">
                 <VodSearch site={current_site} />
-                <Flex>
-                    <Button type="text" style={{ fontSize: 14 }} icon={isDarkMode ? <SunOutlined /> : <MoonOutlined />} onClick={toggleTheme} />
-                    <Button
-                        type="text"
-                        icon={
-                            <SettingOutlined
-                                style={{ cursor: 'pointer', fontSize: 14 }}
-                                onClick={() => {
-                                    router.push('/setting');
-                                }}
-                            />
-                        }
-                        style={{ fontSize: 14 }}
-                    />
-                </Flex>
+                <Button
+                    type="text"
+                    className={styles['vod-header-btn']}
+                    icon={<SettingOutlined />}
+                    onClick={() => {
+                        router.push('/setting');
+                    }}
+                />
             </Flex>
         </Header>
     );

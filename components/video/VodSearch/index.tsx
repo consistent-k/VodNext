@@ -1,11 +1,12 @@
 import { useKeyPress } from 'ahooks';
-import { Button, Flex, Input, Modal, Spin, theme } from 'antd';
+import { Button, Flex, Input, Modal, theme } from 'antd';
 import { debounce, trim } from 'lodash';
 import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
 
 import VodList, { VodListProps } from '../VodList';
 import SearchIcon from '@/components/icons/SearchIcon';
+import { Loading } from '@/components/ui/Loading';
 import useIsMobile from '@/lib/hooks/useIsMobile';
 import { SearchData } from '@/lib/types';
 import { searchApi } from '@/services';
@@ -97,7 +98,7 @@ const SearchContent: React.FC<SearchContentProps> = (props) => {
             </Flex>
 
             <div style={{ height: 'calc(100% - 60px)', overflowY: 'auto', padding: '0 16px 16px 16px' }}>
-                {loading ? <Spin tip="搜索中" fullscreen /> : <VodList dataSource={dataSource} onItemClick={onItemClick}></VodList>}
+                {loading ? <Loading description="搜索中" /> : <VodList dataSource={dataSource} onItemClick={onItemClick}></VodList>}
             </div>
         </Flex>
     );
