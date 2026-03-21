@@ -17,7 +17,7 @@ VodNext 是一个基于 Next.js 和 Tauri 的多端视频聚合播放器，支�
 - **框架**: Next.js 16 + React 19 + TypeScript
 - **状态管理**: Zustand + Valtio
 - **UI 组件库**: Ant Design 6
-- **样式方案**: Tailwind CSS 4 + SCSS Modules
+- **样式方案**: SCSS Modules + CSS 变量（支持主题切换）
 - **桌面端**: Tauri 2（Rust 后端）
 - **HTTP 客户端**: Axios（Web）/ Tauri plugin-http（桌面端）
 - **视频播放**: xgplayer + HLS.js

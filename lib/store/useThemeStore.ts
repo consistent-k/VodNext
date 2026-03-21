@@ -2,14 +2,18 @@ import store from 'store2';
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 
+import { ThemeId } from '@/lib/themes';
+
 interface ThemeStore {
-    isDarkMode: boolean;
+    themeId: ThemeId;
+    setThemeId: (themeId: ThemeId) => void;
 }
 
 export const useThemeStore = create<ThemeStore>()(
     persist(
-        () => ({
-            isDarkMode: true as boolean
+        (set) => ({
+            themeId: 'midnight' as ThemeId,
+            setThemeId: (themeId: ThemeId) => set({ themeId })
         }),
         {
             name: 'vod_next_theme_storage',
