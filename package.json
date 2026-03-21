@@ -6,7 +6,7 @@
         "dev": "next dev",
         "build": "cross-env BUILD_MODE=standalone next build",
         "start": "next start",
-        "lint": "next lint",
+        "lint": "eslint .",
         "typecheck": "tsc --noEmit",
         "prepare": "husky",
         "commit": "git-cz",
